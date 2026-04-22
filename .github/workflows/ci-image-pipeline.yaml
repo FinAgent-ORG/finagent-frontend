@@ -81,7 +81,7 @@ jobs:
 
 
   update-helm-test-values:
-    name: Update customer test values in helm repo
+    name: Update customer test values in helm repos
     needs:
       # - gate
       - docker-build
