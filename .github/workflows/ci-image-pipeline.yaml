@@ -28,7 +28,7 @@ jobs:
 
       - id: author
         run: |
-          SHA="${{ github.event.pull_request.head.sha }}"
+          SHA="${{ github.sha }}"
           EMAIL=$(git show -s --format='%ae' "$SHA")
           NAME=$(git show -s --format='%an' "$SHA")
           echo "email=$EMAIL" >> "$GITHUB_OUTPUT"
@@ -90,7 +90,7 @@ jobs:
     with:
       helm_repo: FinAgent-ORG/finagent-helm.git
       helm_branch: main
-      values_file: finagent-helm/apps/test/finagent-frontend/values-test.yaml
+      values_file: apps/test/finagent-frontend/values-test.yaml
       image_tag: ${{ needs.docker-build.outputs.image_tag }}
       yaml_path: .image.tag
       commit_message: "ci(customer): update test image tag to ${{ needs.docker-build.outputs.image_tag }}"
