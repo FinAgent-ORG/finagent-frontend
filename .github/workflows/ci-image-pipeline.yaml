@@ -80,22 +80,22 @@ jobs:
     secrets: inherit
 
 
-  # update-helm-test-values:
-  #   name: Update customer test values in helm repo
-  #   needs:
-  #     - gate
-  #     - docker-build
-  #   if: ${{ needs.gate.outputs.should_build == 'true' && needs.docker-build.result == 'success' }}
-  #   uses: ./.github/workflows/update-helm-test.yaml
-  #   with:
-  #     helm_repo: FinAgent-ORG/finagent-helm.git
-  #     helm_branch: main
-  #     values_file: finagent-helm/apps/test/finagent-frontend/values-test.yaml
-  #     image_tag: ${{ needs.docker-build.outputs.image_tag }}
-  #     yaml_path: .image.tag
-  #     commit_message: "ci(customer): update test image tag to ${{ needs.docker-build.outputs.image_tag }}"
-  #   secrets:
-  #     HELM_REPO_TOKEN: ${{ secrets.HELM_REPO_TOKEN }}
+  update-helm-test-values:
+    name: Update customer test values in helm repo
+    needs:
+      # - gate
+      - docker-build
+    # if: ${{ needs.gate.outputs.should_build == 'true' && needs.docker-build.result == 'success' }}
+    uses: ./.github/workflows/update-helm-test.yaml
+    with:
+      helm_repo: FinAgent-ORG/finagent-helm.git
+      helm_branch: main
+      values_file: finagent-helm/apps/test/finagent-frontend/values-test.yaml
+      image_tag: ${{ needs.docker-build.outputs.image_tag }}
+      yaml_path: .image.tag
+      commit_message: "ci(customer): update test image tag to ${{ needs.docker-build.outputs.image_tag }}"
+    secrets:
+      HELM_REPO_TOKEN: ${{ secrets.HELM_REPO_TOKEN }}
 
 
   # notify:
