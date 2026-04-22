@@ -1,4 +1,4 @@
-name: Customer service Image workflow pipeline
+name: Finagent frontend Image workflow pipeline
 
 on:
   push:
