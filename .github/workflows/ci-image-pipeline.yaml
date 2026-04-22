@@ -69,7 +69,7 @@ jobs:
   #         echo "should_build=$SHOULD_BUILD" >> "$GITHUB_OUTPUT"
 
   docker-build:
-    needs: gate
+    # needs: gate
     # if: ${{ needs.gate.outputs.should_build == 'true' }}
     permissions:
       contents: read
