@@ -156,7 +156,7 @@ export async function proxyAuthenticatedRequest(request, { service, upstreamPath
 
   const upstreamResponse = await proxyFetch(request, service, upstreamPath, token);
 
-  if (upstreamResponse.status === 401) {
+  if (upstreamResponse.status === 401 && service === "auth") {
     return clearSessionCookie(request, {
       body: { detail: "Authentication required." },
       status: 401,
