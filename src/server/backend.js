@@ -72,7 +72,9 @@ async function proxyFetch(request, service, upstreamPath, token) {
   const upstreamUrl = new URL(upstreamPath, serviceUrl);
   upstreamUrl.search = incomingUrl.search;
 
-  const body = request.method === "GET" || request.method === "HEAD" ? undefined : await request.text();
+  const requestBody =
+    request.method === "GET" || request.method === "HEAD" ? undefined : await request.arrayBuffer();
+  const body = requestBody && requestBody.byteLength ? requestBody : undefined;
 
   try {
     return await fetch(upstreamUrl, {

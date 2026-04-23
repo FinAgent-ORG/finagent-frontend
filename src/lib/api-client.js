@@ -1,10 +1,9 @@
 async function request(path, { body, method = "GET" } = {}) {
+  const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
   const response = await fetch(path, {
     method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: body ? JSON.stringify(body) : undefined,
+    headers: isFormData ? undefined : { "Content-Type": "application/json" },
+    body: body ? (isFormData ? body : JSON.stringify(body)) : undefined,
     credentials: "same-origin",
   });
 
@@ -39,6 +38,11 @@ export const authApi = {
 
 export const expenseApi = {
   createExpense: (body) => request("/api/v1/expenses", { body, method: "POST" }),
+  extractExpenses: (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    return request("/api/v1/expenses/extract", { body: formData, method: "POST" });
+  },
   getTotals: () => request("/api/v1/expenses/totals"),
   listExpenses: () => request("/api/v1/expenses"),
 };

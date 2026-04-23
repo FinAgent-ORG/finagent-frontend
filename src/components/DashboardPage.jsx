@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { chatApi, expenseApi, insightsApi } from "@/src/lib/api-client.js";
-import { sanitizeLines, sanitizeText } from "@/src/lib/sanitize.js";
+import { expenseApi } from "@/src/lib/api-client.js";
+import { sanitizeText } from "@/src/lib/sanitize.js";
 import { useAppError } from "@/src/state/AppErrorContext.jsx";
 import { useAuth } from "@/src/state/AuthContext.jsx";
 
@@ -16,29 +16,20 @@ export default function DashboardPage() {
   const { setError } = useAppError();
   const [totals, setTotals] = useState({ today: 0, month: 0, year: 0 });
   const [expenses, setExpenses] = useState([]);
-  const [insights, setInsights] = useState({ insights: [], suggestions: [] });
-  const [chatHistory, setChatHistory] = useState([]);
-  const [chatMessage, setChatMessage] = useState("");
-  const [chatLoading, setChatLoading] = useState(false);
   const [expenseLoading, setExpenseLoading] = useState(false);
+  const [extracting, setExtracting] = useState(false);
   const [expenseForm, setExpenseForm] = useState({ amount: "", category: "Other", description: "", currency: "INR" });
+  const [attachment, setAttachment] = useState(null);
+  const [extractedExpenses, setExtractedExpenses] = useState([]);
+  const [extractionNotes, setExtractionNotes] = useState([]);
 
   async function refresh() {
     setError("");
 
     try {
-      const [nextTotals, nextExpenses, nextInsights] = await Promise.all([
-        expenseApi.getTotals(),
-        expenseApi.listExpenses(),
-        insightsApi.getSummary(),
-      ]);
-
+      const [nextTotals, nextExpenses] = await Promise.all([expenseApi.getTotals(), expenseApi.listExpenses()]);
       setTotals(nextTotals);
       setExpenses(nextExpenses);
-      setInsights({
-        insights: sanitizeLines(nextInsights.insights ?? []),
-        suggestions: sanitizeLines(nextInsights.suggestions ?? []),
-      });
     } catch (error) {
       if (error.status === 401) {
         router.replace("/signin");
@@ -57,8 +48,16 @@ export default function DashboardPage() {
   async function handleExpenseSubmit(event) {
     event.preventDefault();
     setExpenseLoading(true);
+    setError("");
 
     try {
+      if (attachment) {
+        const extraction = await expenseApi.extractExpenses(attachment);
+        setExtractedExpenses(extraction.expenses ?? []);
+        setExtractionNotes(extraction.notes ?? []);
+        return;
+      }
+
       await expenseApi.createExpense({
         amount: Number(expenseForm.amount),
         currency: expenseForm.currency,
@@ -74,34 +73,34 @@ export default function DashboardPage() {
     }
   }
 
-  async function handleChatSubmit(event) {
-    event.preventDefault();
-    if (!chatMessage.trim()) {
+  async function handleImportExtracted() {
+    if (!extractedExpenses.length) {
       return;
     }
 
-    const outgoing = { role: "user", text: sanitizeText(chatMessage) };
-    const nextHistory = [...chatHistory, outgoing];
-    setChatHistory((current) => [...current, outgoing]);
-    setChatMessage("");
-    setChatLoading(true);
+    setExtracting(true);
+    setError("");
 
     try {
-      const response = await chatApi.sendMessage({
-        message: outgoing.text,
-        history: nextHistory,
-      });
-
-      setChatHistory((current) => [...current, { role: "assistant", text: sanitizeText(response.response) }]);
+      await Promise.all(
+        extractedExpenses.map((expense) =>
+          expenseApi.createExpense({
+            amount: Number(expense.amount),
+            category: expense.category,
+            currency: expense.currency,
+            description: expense.description,
+            expense_date: expense.expense_date || undefined,
+          }),
+        ),
+      );
+      setAttachment(null);
+      setExtractedExpenses([]);
+      setExtractionNotes(["Imported extracted expenses into your ledger."]);
       await refresh();
     } catch (error) {
       setError(sanitizeText(error.message));
-      setChatHistory((current) => [
-        ...current,
-        { role: "assistant", text: "I could not complete that request right now." },
-      ]);
     } finally {
-      setChatLoading(false);
+      setExtracting(false);
     }
   }
 
@@ -145,7 +144,7 @@ export default function DashboardPage() {
               min="0.01"
               onChange={(event) => setExpenseForm((current) => ({ ...current, amount: event.target.value }))}
               placeholder="Amount"
-              required
+              required={!attachment}
               step="0.01"
               type="number"
               value={expenseForm.amount}
@@ -165,64 +164,75 @@ export default function DashboardPage() {
             maxLength={500}
             onChange={(event) => setExpenseForm((current) => ({ ...current, description: event.target.value }))}
             placeholder="Description"
-            required
+            required={!attachment}
             type="text"
             value={expenseForm.description}
           />
+          <label className="attachment-field">
+            <span className="field-label">Attach receipt or file</span>
+            <input
+              accept="image/*,.pdf,.txt,.csv,.json"
+              onChange={(event) => {
+                const nextFile = event.target.files?.[0] ?? null;
+                setAttachment(nextFile);
+                setExtractedExpenses([]);
+                setExtractionNotes(nextFile ? ["Attachment ready. Submit to extract expense candidates."] : []);
+              }}
+              type="file"
+            />
+          </label>
           <button className="button" disabled={expenseLoading} type="submit">
-            {expenseLoading ? "Saving..." : "Save Expense"}
+            {expenseLoading ? "Processing..." : attachment ? "Extract Expenses" : "Save Expense"}
           </button>
         </form>
       </section>
 
-      <section className="panel dashboard-section span-6">
-        <div className="eyebrow">Chat</div>
-        <h2 className="card-title">Ask FinAgent</h2>
-        <div className="chat-log">
-          {chatHistory.map((item, index) => (
-            <div className={`bubble ${item.role}`} key={`${item.role}-${index}`}>
-              {item.text}
-            </div>
-          ))}
-          {chatLoading ? <div className="bubble assistant">FinAgent is thinking...</div> : null}
-        </div>
-        <form className="chat-form" onSubmit={handleChatSubmit}>
-          <input
-            className="chat-input"
-            onChange={(event) => setChatMessage(event.target.value)}
-            placeholder="Try: I spent 250 on groceries"
-            type="text"
-            value={chatMessage}
-          />
-          <button className="button" disabled={chatLoading} type="submit">
-            {chatLoading ? "Sending..." : "Send"}
-          </button>
-        </form>
-      </section>
-
-      <section className="panel dashboard-section span-6 stack">
+      <section className="panel dashboard-section span-8 stack">
         <div>
-          <div className="eyebrow">Insights</div>
-          <h2 className="card-title">What changed</h2>
+          <div className="eyebrow">Attachment flow</div>
+          <h2 className="card-title">Extracted expenses</h2>
           <ul className="clean">
-            {insights.insights.map((line) => (
-              <li className="list-item" key={line}>
-                {line}
+            {extractedExpenses.length ? null : (
+              <li className="list-item">
+                Add expenses manually, or attach a receipt, bank export, or image to extract expense candidates.
+              </li>
+            )}
+            {extractedExpenses.map((item, index) => (
+              <li className="list-item" key={`${item.description}-${index}`}>
+                {Number(item.amount).toFixed(2)} {item.currency} | {item.category} | {sanitizeText(item.description)} |{" "}
+                {item.expense_date || "today"} | confidence {Math.round((item.confidence ?? 0) * 100)}%
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <div className="eyebrow">Suggestions</div>
-          <h2 className="card-title">What to do next</h2>
+          <div className="eyebrow">Notes</div>
+          <h2 className="card-title">Extraction notes</h2>
           <ul className="clean">
-            {insights.suggestions.map((line) => (
+            {extractionNotes.length ? null : (
+              <li className="list-item">Upload a receipt, screenshot, PDF, or export file to analyze expenses.</li>
+            )}
+            {extractionNotes.map((line) => (
               <li className="list-item" key={line}>
                 {line}
               </li>
             ))}
           </ul>
+          {extractedExpenses.length ? (
+            <button className="button" disabled={extracting} onClick={handleImportExtracted} type="button">
+              {extracting ? "Importing..." : "Import Extracted Expenses"}
+            </button>
+          ) : null}
         </div>
+      </section>
+
+      <section className="panel dashboard-section span-4 stack">
+        <div className="eyebrow">Navigation</div>
+        <h2 className="card-title">Deeper analysis lives in Insights</h2>
+        <p className="muted">
+          Use the dedicated Insights tab for AI summaries and suggestions. The chat assistant now stays one click away
+          in the floating drawer so this page can stay focused on entry and review.
+        </p>
       </section>
 
       <section className="panel dashboard-section span-12">

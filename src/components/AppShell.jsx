@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
+import ChatDrawer from "@/src/components/ChatDrawer.jsx";
 import { useAppError } from "@/src/state/AppErrorContext.jsx";
 import { useAuth } from "@/src/state/AuthContext.jsx";
 
@@ -19,6 +20,10 @@ export default function AppShell({ children }) {
     router.refresh();
   }
 
+  function navClass(target) {
+    return pathname === target ? "nav-link active" : "nav-link";
+  }
+
   return (
     <div className="shell">
       <div className="page">
@@ -27,15 +32,20 @@ export default function AppShell({ children }) {
             FinAgent
           </Link>
           <nav className="nav-links">
-            <Link className="nav-link" href="/">
+            <Link className={navClass("/")} href="/">
               Home
             </Link>
             {user ? (
-              <Link className="nav-link" href="/dashboard">
-                Dashboard
-              </Link>
+              <>
+                <Link className={navClass("/dashboard")} href="/dashboard">
+                  Dashboard
+                </Link>
+                <Link className={navClass("/insights")} href="/insights">
+                  Insights
+                </Link>
+              </>
             ) : null}
-            {pathname === "/dashboard" ? <span className="meta">/dashboard</span> : null}
+            {pathname === "/dashboard" || pathname === "/insights" ? <span className="meta">{pathname}</span> : null}
           </nav>
           <div className="nav-actions">
             {user ? (
@@ -68,6 +78,7 @@ export default function AppShell({ children }) {
 
         {children}
       </div>
+      <ChatDrawer />
     </div>
   );
 }
