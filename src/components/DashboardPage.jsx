@@ -115,29 +115,49 @@ export default function DashboardPage() {
 
   return (
     <section className="dashboard-grid">
-      <section className="panel dashboard-section span-4 stack">
-        <div>
-          <div className="eyebrow">Identity</div>
-          <h2 className="card-title">Welcome back</h2>
-          <p className="muted">{user.email}</p>
+      <section className="panel dashboard-section span-12 dashboard-hero glow-card">
+        <div className="dashboard-summary">
+          <div>
+            <div className="eyebrow">Dashboard</div>
+            <h1 className="card-title">A cleaner view of where your money is moving.</h1>
+            <p className="muted">
+              Capture new spending, review extracted entries, and stay on top of the latest totals without leaving
+              this workspace.
+            </p>
+          </div>
+          <div className="summary-strip">
+            <span className="summary-chip">{user.email}</span>
+            <span className="summary-chip">INR ledger</span>
+            <span className="summary-chip">AI-ready receipts</span>
+          </div>
         </div>
-        <div className="stat">
-          <span className="stat-label">Today</span>
-          <strong>{totals.today.toFixed(2)} INR</strong>
-        </div>
-        <div className="stat">
-          <span className="stat-label">This month</span>
-          <strong>{totals.month.toFixed(2)} INR</strong>
-        </div>
-        <div className="stat">
-          <span className="stat-label">This year</span>
-          <strong>{totals.year.toFixed(2)} INR</strong>
+        <div className="metric-grid">
+          <div className="metric-card">
+            <span className="meta-label">Today</span>
+            <span className="metric-value">{totals.today.toFixed(2)}</span>
+            <span className="metric-trend">Live daily spend</span>
+          </div>
+          <div className="metric-card">
+            <span className="meta-label">This month</span>
+            <span className="metric-value">{totals.month.toFixed(2)}</span>
+            <span className="metric-trend positive">Primary tracking window</span>
+          </div>
+          <div className="metric-card">
+            <span className="meta-label">This year</span>
+            <span className="metric-value">{totals.year.toFixed(2)}</span>
+            <span className="metric-trend">Long-range balance context</span>
+          </div>
         </div>
       </section>
 
-      <section className="panel dashboard-section span-8">
-        <div className="eyebrow">Expenses</div>
-        <h2 className="card-title">Capture a new expense</h2>
+      <section className="panel dashboard-section span-7 stack">
+        <div className="section-header">
+          <div className="section-header-copy">
+            <div className="eyebrow">Expense capture</div>
+            <h2 className="card-title">Add a transaction or import one from a file.</h2>
+            <p className="muted">Manual entry and extraction share the same submission flow.</p>
+          </div>
+        </div>
         <form className="expense-form" onSubmit={handleExpenseSubmit}>
           <div className="expense-form-grid">
             <input
@@ -180,6 +200,7 @@ export default function DashboardPage() {
               }}
               type="file"
             />
+            <span className="muted">Supports images, PDFs, text, CSV, and JSON imports.</span>
           </label>
           <button className="button" disabled={expenseLoading} type="submit">
             {expenseLoading ? "Processing..." : attachment ? "Extract Expenses" : "Save Expense"}
@@ -187,64 +208,125 @@ export default function DashboardPage() {
         </form>
       </section>
 
-      <section className="panel dashboard-section span-8 stack">
+      <section className="panel dashboard-section span-5 stack ai-panel">
         <div>
-          <div className="eyebrow">Attachment flow</div>
-          <h2 className="card-title">Extracted expenses</h2>
-          <ul className="clean">
-            {extractedExpenses.length ? null : (
-              <li className="list-item">
-                Add expenses manually, or attach a receipt, bank export, or image to extract expense candidates.
-              </li>
-            )}
-            {extractedExpenses.map((item, index) => (
-              <li className="list-item" key={`${item.description}-${index}`}>
-                {Number(item.amount).toFixed(2)} {item.currency} | {item.category} | {sanitizeText(item.description)} |{" "}
-                {item.expense_date || "today"} | confidence {Math.round((item.confidence ?? 0) * 100)}%
-              </li>
-            ))}
-          </ul>
+          <div className="eyebrow">Identity</div>
+          <h2 className="card-title">Your workspace</h2>
+          <p className="muted">{user.email}</p>
         </div>
-        <div>
-          <div className="eyebrow">Notes</div>
-          <h2 className="card-title">Extraction notes</h2>
-          <ul className="clean">
-            {extractionNotes.length ? null : (
-              <li className="list-item">Upload a receipt, screenshot, PDF, or export file to analyze expenses.</li>
-            )}
-            {extractionNotes.map((line) => (
-              <li className="list-item" key={line}>
-                {line}
-              </li>
-            ))}
-          </ul>
+        <div className="stat-grid">
+          <div className="stat">
+            <span className="stat-label">Today</span>
+            <strong>{totals.today.toFixed(2)} INR</strong>
+          </div>
+          <div className="stat">
+            <span className="stat-label">This month</span>
+            <strong>{totals.month.toFixed(2)} INR</strong>
+          </div>
+          <div className="stat">
+            <span className="stat-label">This year</span>
+            <strong>{totals.year.toFixed(2)} INR</strong>
+          </div>
+        </div>
+        <p className="muted">
+          Want patterns instead of raw entries? The Insights view turns this ledger into highlights and suggested
+          next moves.
+        </p>
+      </section>
+
+      <section className="panel dashboard-section span-7 stack">
+        <div className="section-header">
+          <div className="section-header-copy">
+            <div className="eyebrow">Attachment flow</div>
+            <h2 className="card-title">Extracted expenses</h2>
+          </div>
           {extractedExpenses.length ? (
-            <button className="button" disabled={extracting} onClick={handleImportExtracted} type="button">
+            <button className="button secondary" disabled={extracting} onClick={handleImportExtracted} type="button">
               {extracting ? "Importing..." : "Import Extracted Expenses"}
             </button>
           ) : null}
         </div>
+        <ul className="clean">
+          {extractedExpenses.length ? null : (
+            <li className="empty-state">
+              <strong>No extracted items yet</strong>
+              Add expenses manually, or attach a receipt, bank export, or image to extract expense candidates.
+            </li>
+          )}
+          {extractedExpenses.map((item, index) => (
+            <li className="list-item" key={`${item.description}-${index}`}>
+              <div className="split-row">
+                <div>
+                  <strong>{sanitizeText(item.description)}</strong>
+                  <div className="item-meta">
+                    <span className="item-pill">{item.category}</span>
+                    <span>{item.expense_date || "today"}</span>
+                    <span>confidence {Math.round((item.confidence ?? 0) * 100)}%</span>
+                  </div>
+                </div>
+                <span className="amount positive">
+                  {Number(item.amount).toFixed(2)} {item.currency}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="panel dashboard-section span-4 stack">
-        <div className="eyebrow">Navigation</div>
-        <h2 className="card-title">Deeper analysis lives in Insights</h2>
-        <p className="muted">
-          Use the dedicated Insights tab for AI summaries and suggestions. The chat assistant now stays one click away
-          in the floating drawer so this page can stay focused on entry and review.
-        </p>
+      <section className="panel dashboard-section span-5 stack">
+        <div>
+          <div className="eyebrow">Notes</div>
+          <h2 className="card-title">Extraction notes</h2>
+        </div>
+        <ul className="clean">
+          {extractionNotes.length ? null : (
+            <li className="empty-state">
+              <strong>Waiting for an upload</strong>
+              Upload a receipt, screenshot, PDF, or export file to analyze expenses.
+            </li>
+          )}
+          {extractionNotes.map((line) => (
+            <li className="list-item" key={line}>
+              <span className="item-pill ai">AI extraction</span>
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="panel dashboard-section span-12">
-        <div className="eyebrow">Ledger</div>
-        <h2 className="card-title">Recent expenses</h2>
+        <div className="section-header">
+          <div className="section-header-copy">
+            <div className="eyebrow">Ledger</div>
+            <h2 className="card-title">Recent expenses</h2>
+          </div>
+          <span className="summary-chip">{expenses.length} entries</span>
+        </div>
         <ul className="clean">
-          {expenses.map((expense) => (
-            <li className="list-item" key={expense.id}>
-              {sanitizeText(expense.description)} | {expense.category} | {Number(expense.amount).toFixed(2)}{" "}
-              {sanitizeText(expense.currency)} | {expense.expense_date}
+          {expenses.length ? (
+            expenses.map((expense) => (
+              <li className="list-item" key={expense.id}>
+                <div className="ledger-row">
+                  <div>
+                    <strong>{sanitizeText(expense.description)}</strong>
+                    <div className="ledger-meta">
+                      <span className="item-pill">{expense.category}</span>
+                      <span>{expense.expense_date}</span>
+                      <span>{sanitizeText(expense.currency)}</span>
+                    </div>
+                  </div>
+                  <span className="amount">
+                    {Number(expense.amount).toFixed(2)} {sanitizeText(expense.currency)}
+                  </span>
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="empty-state">
+              <strong>No expenses yet</strong>
+              Add your first transaction above to start building the ledger and insight history.
             </li>
-          ))}
+          )}
         </ul>
       </section>
     </section>

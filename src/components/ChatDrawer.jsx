@@ -14,6 +14,11 @@ export default function ChatDrawer() {
   const [chatHistory, setChatHistory] = useState([]);
   const [chatMessage, setChatMessage] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
+  const suggestions = [
+    "Summarize my grocery spend this month",
+    "What changed most this week?",
+    "Help me log a transport expense",
+  ];
 
   if (!user) {
     return null;
@@ -48,6 +53,10 @@ export default function ChatDrawer() {
     }
   }
 
+  function useSuggestion(text) {
+    setChatMessage(text);
+  }
+
   return (
     <>
       <button
@@ -56,14 +65,15 @@ export default function ChatDrawer() {
         onClick={() => setIsOpen((current) => !current)}
         type="button"
       >
-        {isOpen ? "Close Chat" : "Ask FinAgent"}
+        {isOpen ? "Close Assistant" : "Ask FinAgent"}
       </button>
 
-      <aside className={`chat-drawer panel ${isOpen ? "open" : ""}`}>
+      <aside className={`chat-drawer panel ai-panel ${isOpen ? "open" : ""}`}>
         <div className="chat-drawer-header">
-          <div>
+          <div className="chat-intro">
             <div className="eyebrow">Assistant</div>
             <h2 className="card-title">Quick chat</h2>
+            <p className="muted">Ask about trends, quick logging, or what changed most recently.</p>
           </div>
           <button className="button secondary" onClick={() => setIsOpen(false)} type="button">
             Hide
@@ -72,14 +82,36 @@ export default function ChatDrawer() {
 
         <div className="chat-log">
           {chatHistory.length ? null : (
-            <div className="bubble assistant">Ask about expenses, trends, or quick logging help.</div>
+            <div className="bubble assistant">
+              <strong>Start with a prompt</strong>
+              <span>Ask about expenses, trends, or quick logging help.</span>
+            </div>
           )}
           {chatHistory.map((item, index) => (
             <div className={`bubble ${item.role}`} key={`${item.role}-${index}`}>
+              <span className="bubble-label">{item.role === "user" ? "You" : "FinAgent"}</span>
               {item.text}
             </div>
           ))}
-          {chatLoading ? <div className="bubble assistant">FinAgent is thinking...</div> : null}
+          {chatLoading ? (
+            <div className="bubble assistant">
+              <span className="bubble-label">FinAgent</span>
+              FinAgent is thinking...
+            </div>
+          ) : null}
+        </div>
+
+        <div className="chat-suggestions">
+          {suggestions.map((suggestion) => (
+            <button
+              className="suggestion-pill"
+              key={suggestion}
+              onClick={() => useSuggestion(suggestion)}
+              type="button"
+            >
+              {suggestion}
+            </button>
+          ))}
         </div>
 
         <form className="chat-form" onSubmit={handleSubmit}>

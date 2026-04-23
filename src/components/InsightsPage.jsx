@@ -53,12 +53,13 @@ export default function InsightsPage() {
 
   return (
     <section className="dashboard-grid">
-      <section className="panel dashboard-section span-12 insight-hero">
+      <section className="panel dashboard-section span-12 insight-hero ai-panel glow-card">
         <div>
           <div className="eyebrow">Insights</div>
           <h1 className="card-title">Patterns pulled from your latest expense history.</h1>
           <p className="muted">
-            This tab keeps analysis separate from the operational dashboard so logging and review stay fast.
+            A dedicated AI surface keeps the operational dashboard fast while still turning your ledger into
+            high-signal recommendations.
           </p>
         </div>
         <button className="button" disabled={refreshing} onClick={refresh} type="button">
@@ -66,27 +67,47 @@ export default function InsightsPage() {
         </button>
       </section>
 
-      <section className="panel dashboard-section span-6 stack">
-        <div className="eyebrow">What changed</div>
-        <h2 className="card-title">Spending insights</h2>
+      <section className="panel dashboard-section span-6 stack ai-panel">
+        <div>
+          <div className="eyebrow">What changed</div>
+          <h2 className="card-title">Spending insights</h2>
+        </div>
         <ul className="clean">
-          {insights.insights.map((line) => (
-            <li className="list-item" key={line}>
-              {line}
+          {insights.insights.length ? (
+            insights.insights.map((line) => (
+              <li className="list-item" key={line}>
+                <span className="item-pill ai">AI signal</span>
+                <span>{line}</span>
+              </li>
+            ))
+          ) : (
+            <li className="empty-state">
+              <strong>No insight summary yet</strong>
+              Refresh insights to generate an updated read on recent expense behavior.
             </li>
-          ))}
+          )}
         </ul>
       </section>
 
       <section className="panel dashboard-section span-6 stack">
-        <div className="eyebrow">Next moves</div>
-        <h2 className="card-title">Suggestions</h2>
+        <div>
+          <div className="eyebrow">Next moves</div>
+          <h2 className="card-title">Suggestions</h2>
+        </div>
         <ul className="clean">
-          {insights.suggestions.map((line) => (
-            <li className="list-item" key={line}>
-              {line}
+          {insights.suggestions.length ? (
+            insights.suggestions.map((line) => (
+              <li className="list-item" key={line}>
+                <span className="item-pill">Recommended</span>
+                <span>{line}</span>
+              </li>
+            ))
+          ) : (
+            <li className="empty-state">
+              <strong>No suggestions yet</strong>
+              Suggestions will appear here after the insight engine evaluates your ledger.
             </li>
-          ))}
+          )}
         </ul>
       </section>
     </section>

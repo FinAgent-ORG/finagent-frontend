@@ -29,7 +29,11 @@ export default function AppShell({ children }) {
       <div className="page">
         <header className="panel nav">
           <Link className="brand" href="/">
-            FinAgent
+            <span className="brand-mark" aria-hidden="true" />
+            <span className="brand-copy">
+              <span className="brand-label">Personal finance OS</span>
+              <span className="brand-name">FinAgent</span>
+            </span>
           </Link>
           <nav className="nav-links">
             <Link className={navClass("/")} href="/">
@@ -45,13 +49,18 @@ export default function AppShell({ children }) {
                 </Link>
               </>
             ) : null}
-            {pathname === "/dashboard" || pathname === "/insights" ? <span className="meta">{pathname}</span> : null}
+            {pathname === "/dashboard" || pathname === "/insights" ? (
+              <span className="nav-status meta">{pathname.replace("/", "")}</span>
+            ) : null}
           </nav>
           <div className="nav-actions">
             {user ? (
-              <button className="button secondary" onClick={handleSignout} type="button">
-                Sign Out
-              </button>
+              <>
+                <span className="user-pill meta">{user.email}</span>
+                <button className="button secondary" onClick={handleSignout} type="button">
+                  Sign Out
+                </button>
+              </>
             ) : loading ? (
               <span className="meta">Checking session</span>
             ) : (
