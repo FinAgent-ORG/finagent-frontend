@@ -37,7 +37,9 @@ export default function LandingPage() {
 
         <aside className="surface-note">
           <span className="meta">Runtime topology</span>
-          <div className="card-title">HAProxy -> kgateway -> Next.js frontend -> internal services</div>
+          <div className="card-title">
+            HAProxy {"->"} kgateway {"->"} Next.js frontend {"->"} internal services
+          </div>
           <p className="muted">
             The browser never needs Kubernetes DNS and the backend services do not need external routes to
             function.
