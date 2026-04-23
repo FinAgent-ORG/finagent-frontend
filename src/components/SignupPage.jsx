@@ -38,9 +38,9 @@ export default function SignupPage() {
     <section className="auth-shell">
       <section className="panel auth-card">
         <div className="eyebrow">New workspace</div>
-        <h1>Create a premium finance workspace in one step.</h1>
+        <h1>Create your account and start tracking your spending.</h1>
         <p className="muted">
-          The frontend owns the session boundary and forwards auth requests privately inside the cluster.
+          Set up your account to begin logging expenses, importing receipts, and getting AI-generated summaries.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -81,25 +81,25 @@ export default function SignupPage() {
         </form>
       </section>
       <aside className="panel auth-aside">
-        <div className="eyebrow">Built for clarity</div>
-        <h2 className="card-title">Capture spending, surface patterns, and keep AI in the loop.</h2>
+        <div className="eyebrow">How it works</div>
+        <h2 className="card-title">Start simple, then let the app help with the analysis.</h2>
         <p className="muted">
-          FinAgent combines manual entry, file extraction, and AI insight into a single dark-mode workspace that
-          feels focused from the first screen.
+          You can begin by adding a few expenses manually. Once you have data in the ledger, the insights page and
+          assistant become much more useful.
         </p>
         <div className="summary-strip">
-          <span className="summary-chip">Expense capture</span>
-          <span className="summary-chip">Instant summaries</span>
-          <span className="summary-chip">AI assistance</span>
+          <span className="summary-chip">Create account</span>
+          <span className="summary-chip">Add first expenses</span>
+          <span className="summary-chip">Review insights</span>
         </div>
         <div className="feature-list">
           <div className="feature-item">
             <strong>Manual and imported entries</strong>
-            <span className="muted">Log expenses directly or turn uploads into structured transactions.</span>
+            <span className="muted">Log expenses directly or upload files to extract likely transactions.</span>
           </div>
           <div className="feature-item">
             <strong>Dedicated insights lane</strong>
-            <span className="muted">Keep day-to-day entry fast while analysis and suggestions live in their own view.</span>
+            <span className="muted">Use the insights page when you want summaries, patterns, and suggestions.</span>
           </div>
         </div>
       </aside>

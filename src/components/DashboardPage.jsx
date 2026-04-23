@@ -119,16 +119,16 @@ export default function DashboardPage() {
         <div className="dashboard-summary">
           <div>
             <div className="eyebrow">Dashboard</div>
-            <h1 className="card-title">A cleaner view of where your money is moving.</h1>
+            <h1 className="card-title">Your day-to-day expense workspace.</h1>
             <p className="muted">
-              Capture new spending, review extracted entries, and stay on top of the latest totals without leaving
-              this workspace.
+              Use this page to add expenses, upload receipts or exports, and review what has already been saved to
+              your ledger.
             </p>
           </div>
           <div className="summary-strip">
             <span className="summary-chip">{user.email}</span>
             <span className="summary-chip">INR ledger</span>
-            <span className="summary-chip">AI-ready receipts</span>
+            <span className="summary-chip">Receipt import ready</span>
           </div>
         </div>
         <div className="metric-grid">
@@ -155,7 +155,7 @@ export default function DashboardPage() {
           <div className="section-header-copy">
             <div className="eyebrow">Expense capture</div>
             <h2 className="card-title">Add a transaction or import one from a file.</h2>
-            <p className="muted">Manual entry and extraction share the same submission flow.</p>
+            <p className="muted">Enter an amount and description yourself, or attach a file to extract candidate expenses.</p>
           </div>
         </div>
         <form className="expense-form" onSubmit={handleExpenseSubmit}>
@@ -229,8 +229,7 @@ export default function DashboardPage() {
           </div>
         </div>
         <p className="muted">
-          Want patterns instead of raw entries? The Insights view turns this ledger into highlights and suggested
-          next moves.
+          Once this ledger has some activity, the Insights page can summarize trends and suggest next steps.
         </p>
       </section>
 

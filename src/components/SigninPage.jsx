@@ -33,10 +33,9 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
     <section className="auth-shell">
       <section className="panel auth-card">
         <div className="eyebrow">Welcome back</div>
-        <h1>Sign in to your finance cockpit.</h1>
+        <h1>Sign in and continue managing your expenses.</h1>
         <p className="muted">
-          Your browser stays on the frontend origin while the server handles every private cluster hop in the
-          background.
+          Use your account to return to the dashboard, log new spending, review imports, and check fresh insights.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -66,25 +65,25 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
         </form>
       </section>
       <aside className="panel auth-aside ai-panel">
-        <div className="eyebrow">Why it feels clean</div>
-        <h2 className="card-title">One polished entrypoint. Zero backend exposure.</h2>
+        <div className="eyebrow">What you can do</div>
+        <h2 className="card-title">Pick up right where you left off.</h2>
         <p className="muted">
-          Authentication, expense data, insights, and assistant responses stay behind the frontend boundary so the
-          experience can feel seamless without weakening the security model.
+          After signing in, you can add transactions, upload receipts for extraction, and ask the assistant for
+          help understanding your recent spending.
         </p>
         <div className="summary-strip">
-          <span className="summary-chip">Private auth</span>
-          <span className="summary-chip">Cookie session</span>
-          <span className="summary-chip">Secure proxy</span>
+          <span className="summary-chip">Add expenses</span>
+          <span className="summary-chip">Import receipts</span>
+          <span className="summary-chip">Review insights</span>
         </div>
         <div className="feature-list">
           <div className="feature-item">
-            <strong>Single public surface</strong>
-            <span className="muted">Users only interact with the frontend while services stay internal.</span>
+            <strong>Dashboard</strong>
+            <span className="muted">Track spending totals and add new entries quickly.</span>
           </div>
           <div className="feature-item">
-            <strong>Fast product feel</strong>
-            <span className="muted">The proxy model keeps the experience clean without exposing service topology.</span>
+            <strong>Insights and assistant</strong>
+            <span className="muted">See trends, suggestions, and ask questions about your activity.</span>
           </div>
         </div>
       </aside>

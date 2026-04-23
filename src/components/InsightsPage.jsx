@@ -56,10 +56,10 @@ export default function InsightsPage() {
       <section className="panel dashboard-section span-12 insight-hero ai-panel glow-card">
         <div>
           <div className="eyebrow">Insights</div>
-          <h1 className="card-title">Patterns pulled from your latest expense history.</h1>
+          <h1 className="card-title">Understand recent spending patterns and what to do next.</h1>
           <p className="muted">
-            A dedicated AI surface keeps the operational dashboard fast while still turning your ledger into
-            high-signal recommendations.
+            This page turns your recent expense history into plain-language observations and suggestions so you can
+            spot changes quickly.
           </p>
         </div>
         <button className="button" disabled={refreshing} onClick={refresh} type="button">
