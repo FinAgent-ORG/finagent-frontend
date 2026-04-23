@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -8,10 +7,8 @@ import { sanitizeText } from "@/src/lib/sanitize.js";
 import { useAppError } from "@/src/state/AppErrorContext.jsx";
 import { useAuth } from "@/src/state/AuthContext.jsx";
 
-export default function SigninPage() {
+export default function SigninPage({ nextPath = "/dashboard" }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const nextPath = searchParams.get("next") || "/dashboard";
   const { signin } = useAuth();
   const { setError } = useAppError();
   const [form, setForm] = useState({ email: "", password: "" });
