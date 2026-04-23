@@ -1,10 +1,7 @@
-const AUTH_API = import.meta.env.VITE_AUTH_API_URL ?? "";
-const EXPENSE_API = import.meta.env.VITE_EXPENSE_API_URL ?? "";
-const INSIGHTS_API = import.meta.env.VITE_INSIGHTS_API_URL ?? "";
-const CHAT_API = import.meta.env.VITE_CHAT_API_URL ?? "";
+const GATEWAY_URL = (import.meta.env.VITE_GATEWAY_URL ?? "").replace(/\/$/, "");
 
-async function request(baseUrl, path, { method = "GET", token, body } = {}) {
-  const response = await fetch(`${baseUrl}${path}`, {
+async function request(path, { method = "GET", token, body } = {}) {
+  const response = await fetch(`${GATEWAY_URL}${path}`, {
     method,
     headers: {
       "Content-Type": "application/json",
@@ -32,21 +29,21 @@ async function request(baseUrl, path, { method = "GET", token, body } = {}) {
 }
 
 export const authApi = {
-  signup: (body) => request(AUTH_API, "/api/v1/auth/signup", { method: "POST", body }),
-  signin: (body) => request(AUTH_API, "/api/v1/auth/login", { method: "POST", body }),
-  me: (token) => request(AUTH_API, "/api/v1/auth/me", { token }),
+  signup: (body) => request("/api/v1/auth/signup", { method: "POST", body }),
+  signin: (body) => request("/api/v1/auth/login", { method: "POST", body }),
+  me: (token) => request("/api/v1/auth/me", { token }),
 };
 
 export const expenseApi = {
-  createExpense: (token, body) => request(EXPENSE_API, "/api/v1/expenses", { method: "POST", token, body }),
-  listExpenses: (token) => request(EXPENSE_API, "/api/v1/expenses", { token }),
-  getTotals: (token) => request(EXPENSE_API, "/api/v1/expenses/totals", { token }),
+  createExpense: (token, body) => request("/api/v1/expenses", { method: "POST", token, body }),
+  listExpenses: (token) => request("/api/v1/expenses", { token }),
+  getTotals: (token) => request("/api/v1/expenses/totals", { token }),
 };
 
 export const insightsApi = {
-  getSummary: (token) => request(INSIGHTS_API, "/api/v1/insights/summary", { token }),
+  getSummary: (token) => request("/api/v1/insights/summary", { token }),
 };
 
 export const chatApi = {
-  sendMessage: (token, body) => request(CHAT_API, "/api/v1/chat/messages", { method: "POST", token, body }),
+  sendMessage: (token, body) => request("/api/v1/chat/messages", { method: "POST", token, body }),
 };
