@@ -16,10 +16,6 @@ export default function ChatDrawer() {
   const [chatMessage, setChatMessage] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
 
-  if (!user) {
-    return null;
-  }
-
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 720px)");
 
@@ -35,6 +31,10 @@ export default function ChatDrawer() {
       mediaQuery.removeEventListener("change", syncLayout);
     };
   }, []);
+
+  if (!user) {
+    return null;
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
