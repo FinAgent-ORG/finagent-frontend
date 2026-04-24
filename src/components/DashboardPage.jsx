@@ -115,65 +115,41 @@ export default function DashboardPage() {
 
   return (
     <section className="dashboard-grid">
-      <section className="panel dashboard-section span-12 dashboard-hero">
+      <section className="panel dashboard-section span-12 dashboard-hero dashboard-hero-compact">
         <div className="dashboard-summary">
           <div>
             <div className="eyebrow">Dashboard</div>
             <h1 className="card-title">
-              A command center for expense capture, imports, and
+              Spending overview with faster access to
               {" "}
-              <span className="gradient-text">AI signal.</span>
+              <span className="gradient-text">what matters.</span>
             </h1>
             <p className="muted">
-              Add expenses manually, import them from files, and keep your running ledger visible while the assistant
-              stays close by for quick questions.
+              Track today, this month, and this year at a glance, then move straight into expense capture and account
+              details below.
             </p>
-          </div>
-          <div className="summary-strip">
-            <span className="summary-chip">{user.email}</span>
-            <span className="summary-chip">INR ledger</span>
-            <span className="summary-chip">Receipt import ready</span>
           </div>
         </div>
-        <div className="hero-side-stack">
-          <div className="assistant-spotlight corner-accent">
-            <div className="assistant-spotlight-head">
-              <div>
-                <div className="eyebrow">Assistant</div>
-                <h2 className="card-title">Copilot has first-class space now.</h2>
-              </div>
-              <span className="item-pill ai">Ready</span>
-            </div>
-            <p className="muted">
-              Use the floating assistant to ask about category changes, recent spending patterns, or what to log next.
-            </p>
-            <div className="assistant-sample-list">
-              <span className="summary-chip">Summarize my grocery spend this month</span>
-              <span className="summary-chip">What changed most this week?</span>
-              <span className="summary-chip">Help me log a transport expense</span>
-            </div>
-          </div>
-          <div className="metric-grid">
-            <div className="metric-card">
+        <div className="metric-grid metric-grid-emphasis">
+          <div className="metric-card metric-card-primary">
             <span className="meta-label">Today</span>
             <span className="metric-value">{totals.today.toFixed(2)}</span>
             <span className="metric-trend">Live daily spend</span>
-            </div>
-            <div className="metric-card">
+          </div>
+          <div className="metric-card metric-card-primary">
             <span className="meta-label">This month</span>
             <span className="metric-value">{totals.month.toFixed(2)}</span>
             <span className="metric-trend positive">Primary tracking window</span>
-            </div>
-            <div className="metric-card">
+          </div>
+          <div className="metric-card metric-card-primary">
             <span className="meta-label">This year</span>
             <span className="metric-value">{totals.year.toFixed(2)}</span>
             <span className="metric-trend">Long-range balance context</span>
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="panel dashboard-section span-7 stack">
+      <section className="panel dashboard-section span-8 stack">
         <div className="section-header">
           <div className="section-header-copy">
             <div className="eyebrow">Expense capture</div>
@@ -231,11 +207,11 @@ export default function DashboardPage() {
         </form>
       </section>
 
-      <section className="panel dashboard-section span-5 stack corner-accent">
+      <section className="panel dashboard-section span-4 stack corner-accent account-card">
         <div>
           <div className="eyebrow">Account</div>
           <h2 className="card-title">Workspace</h2>
-          <p className="muted">{user.email}</p>
+          <p className="account-email meta">{user.email}</p>
         </div>
         <div className="stat-grid">
           <div className="stat">

@@ -52,7 +52,6 @@ export default function AppShell({ children }) {
             {pathname === "/dashboard" || pathname === "/insights" ? (
               <span className="nav-status meta">{pathname.replace("/", "")}</span>
             ) : null}
-            {user ? <span className="nav-assistant-pill">Copilot online</span> : null}
           </nav>
           <div className="nav-actions">
             {user ? (
