@@ -31,7 +31,7 @@ export default function AppShell({ children }) {
           <Link className="brand" href="/">
             <span className="brand-mark" aria-hidden="true" />
             <span className="brand-copy">
-              <span className="brand-label">Finance workspace</span>
+              <span className="brand-label">Bitcoin DeFi Ledger</span>
               <span className="brand-name">FinAgent</span>
             </span>
           </Link>
@@ -52,7 +52,7 @@ export default function AppShell({ children }) {
             {pathname === "/dashboard" || pathname === "/insights" ? (
               <span className="nav-status meta">{pathname.replace("/", "")}</span>
             ) : null}
-            {user ? <span className="nav-assistant-pill">AI copilot ready</span> : null}
+            {user ? <span className="nav-assistant-pill">Copilot online</span> : null}
           </nav>
           <div className="nav-actions">
             {user ? (

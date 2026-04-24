@@ -33,9 +33,13 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
     <section className="auth-shell">
       <section className="panel auth-card">
         <div className="eyebrow">Welcome back</div>
-        <h1>Sign in to continue.</h1>
+        <h1>
+          Re-enter your
+          {" "}
+          <span className="gradient-text">trusted ledger.</span>
+        </h1>
         <p className="muted">
-          Return to your dashboard, review recent expenses, and jump back into your AI-assisted finance workspace.
+          Return to your dashboard, review recent expenses, and step back into your AI-assisted finance workspace.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -66,7 +70,7 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
       </section>
       <aside className="panel auth-aside">
         <div className="eyebrow">Workspace</div>
-        <h2 className="card-title">Pick up where you left off.</h2>
+        <h2 className="card-title">Pick up where your last block ended.</h2>
         <p className="muted">
           After signing in, you can log expenses, import receipts, review concise summaries, and ask the assistant for
           quick context.
@@ -77,11 +81,11 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
           <span className="summary-chip">Chat for answers</span>
         </div>
         <div className="feature-list">
-          <div className="feature-item">
+          <div className="feature-item corner-accent">
             <strong>Dashboard</strong>
             <span className="muted">Track spending totals and add new entries quickly.</span>
           </div>
-          <div className="feature-item">
+          <div className="feature-item corner-accent">
             <strong>Insights and assistant</strong>
             <span className="muted">Review trends and ask quick questions when you need extra context.</span>
           </div>

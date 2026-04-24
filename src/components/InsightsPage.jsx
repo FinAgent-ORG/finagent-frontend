@@ -56,7 +56,11 @@ export default function InsightsPage() {
       <section className="panel dashboard-section span-12 insight-hero">
         <div>
           <div className="eyebrow">Insights</div>
-          <h1 className="card-title">See recent patterns and decide what to do next.</h1>
+          <h1 className="card-title">
+            Inspect recent patterns and act with
+            {" "}
+            <span className="gradient-text">conviction.</span>
+          </h1>
           <p className="muted">
             This page turns recent expense history into a concise brief, so changes are easier to spot and follow up on
             with the assistant.
@@ -67,7 +71,7 @@ export default function InsightsPage() {
         </button>
       </section>
 
-      <section className="panel dashboard-section span-6 stack">
+      <section className="panel dashboard-section span-6 stack corner-accent">
         <div>
           <div className="eyebrow">What changed</div>
           <h2 className="card-title">Spending insights</h2>
@@ -89,7 +93,7 @@ export default function InsightsPage() {
         </ul>
       </section>
 
-      <section className="panel dashboard-section span-6 stack">
+      <section className="panel dashboard-section span-6 stack corner-accent">
         <div>
           <div className="eyebrow">Next moves</div>
           <h2 className="card-title">Suggestions</h2>

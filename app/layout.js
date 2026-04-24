@@ -1,4 +1,4 @@
-import { Manrope, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
@@ -10,9 +10,14 @@ export const metadata = {
   description: "Secure spending intelligence routed through a single frontend edge.",
 };
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-inter",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -23,7 +28,7 @@ const spaceGrotesk = Space_Grotesk({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${spaceGrotesk.variable}`}>
+      <body className={`${inter.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable}`}>
         <Providers>
           <AppShell>{children}</AppShell>
         </Providers>

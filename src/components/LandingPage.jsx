@@ -3,19 +3,23 @@ import Link from "next/link";
 export default function LandingPage() {
   return (
     <section className="panel hero">
-      <div className="eyebrow">Finance AI workspace</div>
+      <div className="eyebrow">Bitcoin DeFi workspace</div>
       <div className="hero-grid">
         <div className="hero-copy">
-          <h1>Minimal finance tracking, with the assistant always within reach.</h1>
+          <h1>
+            Track spending inside a trusted financial ledger built for
+            {" "}
+            <span className="gradient-text">digital value.</span>
+          </h1>
           <p className="hero-lead">
-            FinAgent keeps the ledger clean and focused, then layers in AI for imports, trend summaries, and fast
-            follow-up questions when you need more context.
+            FinAgent keeps the workflow precise and uncluttered, then layers in AI for imports, pattern detection, and
+            fast follow-up questions without taking over the interface.
           </p>
           <div className="hero-proof">
             <span className="hero-proof-item">Manual expense logging</span>
             <span className="hero-proof-item">Receipt and file import</span>
             <span className="hero-proof-item">AI spending insights</span>
-            <span className="hero-proof-item">Embedded assistant</span>
+            <span className="hero-proof-item">Embedded copilot</span>
           </div>
           <div className="hero-actions">
             <Link className="button" href="/signup">
@@ -27,32 +31,49 @@ export default function LandingPage() {
           </div>
           <div className="hero-stats">
             <div className="hero-stat">
-              <span className="hero-stat-label">Capture</span>
-              <strong>Log every spend</strong>
+              <span className="hero-stat-label">Block 01</span>
+              <strong>Capture spend</strong>
             </div>
             <div className="hero-stat">
-              <span className="hero-stat-label">Import</span>
-              <strong>Pull from receipts</strong>
+              <span className="hero-stat-label">Block 02</span>
+              <strong>Import receipts</strong>
             </div>
             <div className="hero-stat">
-              <span className="hero-stat-label">Ask</span>
-              <strong>Chat for quick answers</strong>
+              <span className="hero-stat-label">Block 03</span>
+              <strong>Ask the copilot</strong>
             </div>
           </div>
         </div>
 
         <aside className="surface-note">
-          <span className="meta">Workspace preview</span>
+          <span className="meta">Node preview</span>
           <div className="surface-stack">
-            <div className="card-title">A focused control room for spending, imports, and AI help.</div>
+            <div className="card-title">A premium ledger node for spending, imports, and AI intelligence.</div>
             <p className="muted">
-              The layout stays calm and structured like a modern finance product, while the assistant sits close to the
-              main workflow instead of feeling bolted on.
+              The interface is built around trust cues, exact data typography, thin borders, and glowing action states
+              so the whole product feels secure, technical, and valuable.
             </p>
+          </div>
+          <div className="hero-orbit" aria-hidden="true">
+            <div className="hero-orbit-core" />
+            <div className="hero-orbit-ring outer" />
+            <div className="hero-orbit-ring inner" />
+            <div className="orbit-card orbit-card-top">
+              <span className="orbit-card-label">Live status</span>
+              <strong>Node synced</strong>
+            </div>
+            <div className="orbit-card orbit-card-right">
+              <span className="orbit-card-label">Monthly flow</span>
+              <strong>Tracked</strong>
+            </div>
+            <div className="orbit-card orbit-card-bottom">
+              <span className="orbit-card-label">Assistant</span>
+              <strong>Responsive</strong>
+            </div>
           </div>
           <div className="assistant-preview">
             <div className="assistant-preview-head">
-              <span className="item-pill ai">FinAgent assistant</span>
+              <span className="item-pill ai">FinAgent copilot</span>
               <span className="meta">Live companion</span>
             </div>
             <div className="assistant-preview-body">
@@ -73,11 +94,23 @@ export default function LandingPage() {
             Start by adding a few expenses. Once your ledger has activity, the insights and assistant become much more
             useful.
           </p>
-          <div className="topology-list">
-            <div className="topology-item">Use the Dashboard to add expenses one by one.</div>
-            <div className="topology-item">Upload a receipt or export file to extract likely entries.</div>
-            <div className="topology-item">Import the extracted items you want to keep.</div>
-            <div className="topology-item">Open Insights or ask the assistant for a quick read.</div>
+          <div className="chain-timeline">
+            <div className="timeline-item">
+              <span className="timeline-node">01</span>
+              <div className="timeline-copy">Use the Dashboard to add expenses one by one.</div>
+            </div>
+            <div className="timeline-item">
+              <span className="timeline-node">02</span>
+              <div className="timeline-copy">Upload a receipt or export file to extract likely entries.</div>
+            </div>
+            <div className="timeline-item">
+              <span className="timeline-node">03</span>
+              <div className="timeline-copy">Import the extracted items you want to keep.</div>
+            </div>
+            <div className="timeline-item">
+              <span className="timeline-node">04</span>
+              <div className="timeline-copy">Open Insights or ask the assistant for a quick read.</div>
+            </div>
           </div>
         </aside>
       </div>

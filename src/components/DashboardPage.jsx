@@ -119,7 +119,11 @@ export default function DashboardPage() {
         <div className="dashboard-summary">
           <div>
             <div className="eyebrow">Dashboard</div>
-            <h1 className="card-title">A cleaner command center for expense capture and review.</h1>
+            <h1 className="card-title">
+              A command center for expense capture, imports, and
+              {" "}
+              <span className="gradient-text">AI signal.</span>
+            </h1>
             <p className="muted">
               Add expenses manually, import them from files, and keep your running ledger visible while the assistant
               stays close by for quick questions.
@@ -132,11 +136,11 @@ export default function DashboardPage() {
           </div>
         </div>
         <div className="hero-side-stack">
-          <div className="assistant-spotlight">
+          <div className="assistant-spotlight corner-accent">
             <div className="assistant-spotlight-head">
               <div>
                 <div className="eyebrow">Assistant</div>
-                <h2 className="card-title">Chat has first-class space now.</h2>
+                <h2 className="card-title">Copilot has first-class space now.</h2>
               </div>
               <span className="item-pill ai">Ready</span>
             </div>
@@ -227,7 +231,7 @@ export default function DashboardPage() {
         </form>
       </section>
 
-      <section className="panel dashboard-section span-5 stack">
+      <section className="panel dashboard-section span-5 stack corner-accent">
         <div>
           <div className="eyebrow">Account</div>
           <h2 className="card-title">Workspace</h2>
@@ -292,7 +296,7 @@ export default function DashboardPage() {
         </ul>
       </section>
 
-      <section className="panel dashboard-section span-5 stack">
+      <section className="panel dashboard-section span-5 stack corner-accent">
         <div>
           <div className="eyebrow">Notes</div>
           <h2 className="card-title">Extraction notes</h2>

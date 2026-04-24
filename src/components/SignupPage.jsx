@@ -38,7 +38,11 @@ export default function SignupPage() {
     <section className="auth-shell">
       <section className="panel auth-card">
         <div className="eyebrow">New workspace</div>
-        <h1>Create your account and start tracking expenses.</h1>
+        <h1>
+          Create your account and start tracking
+          {" "}
+          <span className="gradient-text">digital value.</span>
+        </h1>
         <p className="muted">
           Set up your account to begin logging expenses, importing receipts, reviewing AI summaries, and asking quick
           questions whenever you need clarity.
@@ -94,11 +98,11 @@ export default function SignupPage() {
           <span className="summary-chip">Ask the assistant</span>
         </div>
         <div className="feature-list">
-          <div className="feature-item">
+          <div className="feature-item corner-accent">
             <strong>Manual and imported entries</strong>
             <span className="muted">Log expenses directly or upload files to extract likely transactions.</span>
           </div>
-          <div className="feature-item">
+          <div className="feature-item corner-accent">
             <strong>Dedicated insights lane</strong>
             <span className="muted">Use the insights page when you want summaries, patterns, and suggestions.</span>
           </div>
