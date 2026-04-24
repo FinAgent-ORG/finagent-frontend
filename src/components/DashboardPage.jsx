@@ -115,14 +115,13 @@ export default function DashboardPage() {
 
   return (
     <section className="dashboard-grid">
-      <section className="panel dashboard-section span-12 dashboard-hero glow-card">
+      <section className="panel dashboard-section span-12 dashboard-hero">
         <div className="dashboard-summary">
           <div>
             <div className="eyebrow">Dashboard</div>
-            <h1 className="card-title">Your day-to-day expense workspace.</h1>
+            <h1 className="card-title">A simple place to log, import, and review expenses.</h1>
             <p className="muted">
-              Use this page to add expenses, upload receipts or exports, and review what has already been saved to
-              your ledger.
+              Add expenses manually, import them from files, and keep an eye on what is already in your ledger.
             </p>
           </div>
           <div className="summary-strip">
@@ -208,10 +207,10 @@ export default function DashboardPage() {
         </form>
       </section>
 
-      <section className="panel dashboard-section span-5 stack ai-panel">
+      <section className="panel dashboard-section span-5 stack">
         <div>
-          <div className="eyebrow">Identity</div>
-          <h2 className="card-title">Your workspace</h2>
+          <div className="eyebrow">Account</div>
+          <h2 className="card-title">Workspace</h2>
           <p className="muted">{user.email}</p>
         </div>
         <div className="stat-grid">

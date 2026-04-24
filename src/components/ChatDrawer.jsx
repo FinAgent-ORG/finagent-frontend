@@ -60,23 +60,30 @@ export default function ChatDrawer() {
   return (
     <>
       <button
+        aria-hidden={!isOpen}
+        className={`chat-backdrop ${isOpen ? "open" : ""}`}
+        onClick={() => setIsOpen(false)}
+        tabIndex={isOpen ? 0 : -1}
+        type="button"
+      />
+      <button
         aria-expanded={isOpen}
         className="chat-fab"
         onClick={() => setIsOpen((current) => !current)}
         type="button"
       >
-        {isOpen ? "Close Assistant" : "Ask FinAgent"}
+        {isOpen ? "Close" : "Assistant"}
       </button>
 
-      <aside className={`chat-drawer panel ai-panel ${isOpen ? "open" : ""}`}>
+      <aside aria-hidden={!isOpen} className={`chat-drawer panel ${isOpen ? "open" : ""}`}>
         <div className="chat-drawer-header">
           <div className="chat-intro">
             <div className="eyebrow">Assistant</div>
-            <h2 className="card-title">Quick chat</h2>
-            <p className="muted">Ask about trends, quick logging, or what changed most recently.</p>
+            <h2 className="card-title">Ask FinAgent</h2>
+            <p className="muted">Get a quick answer about your recent expenses or logbook.</p>
           </div>
           <button className="button secondary" onClick={() => setIsOpen(false)} type="button">
-            Hide
+            Close
           </button>
         </div>
 
@@ -84,7 +91,7 @@ export default function ChatDrawer() {
           {chatHistory.length ? null : (
             <div className="bubble assistant">
               <strong>Start with a prompt</strong>
-              <span>Ask about expenses, trends, or quick logging help.</span>
+              <span>Try a quick question about spending, categories, or recent changes.</span>
             </div>
           )}
           {chatHistory.map((item, index) => (
@@ -118,7 +125,7 @@ export default function ChatDrawer() {
           <input
             className="chat-input"
             onChange={(event) => setChatMessage(event.target.value)}
-            placeholder="Try: summarize my grocery spend this month"
+            placeholder="Ask a question about your expenses"
             type="text"
             value={chatMessage}
           />

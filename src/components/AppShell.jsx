@@ -31,7 +31,7 @@ export default function AppShell({ children }) {
           <Link className="brand" href="/">
             <span className="brand-mark" aria-hidden="true" />
             <span className="brand-copy">
-              <span className="brand-label">Personal finance OS</span>
+              <span className="brand-label">AI expense tracker</span>
               <span className="brand-name">FinAgent</span>
             </span>
           </Link>

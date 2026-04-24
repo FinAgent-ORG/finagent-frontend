@@ -38,9 +38,9 @@ export default function SignupPage() {
     <section className="auth-shell">
       <section className="panel auth-card">
         <div className="eyebrow">New workspace</div>
-        <h1>Create your account and start tracking your spending.</h1>
+        <h1>Create your account and start tracking expenses.</h1>
         <p className="muted">
-          Set up your account to begin logging expenses, importing receipts, and getting AI-generated summaries.
+          Set up your account to begin logging expenses, importing receipts, and reviewing AI summaries.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -82,10 +82,9 @@ export default function SignupPage() {
       </section>
       <aside className="panel auth-aside">
         <div className="eyebrow">How it works</div>
-        <h2 className="card-title">Start simple, then let the app help with the analysis.</h2>
+        <h2 className="card-title">Start simple, then use AI where it adds value.</h2>
         <p className="muted">
-          You can begin by adding a few expenses manually. Once you have data in the ledger, the insights page and
-          assistant become much more useful.
+          Begin with the ledger. Once you have data, the insights page and assistant can help you interpret it faster.
         </p>
         <div className="summary-strip">
           <span className="summary-chip">Create account</span>

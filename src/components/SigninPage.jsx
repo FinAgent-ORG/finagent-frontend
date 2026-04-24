@@ -33,9 +33,9 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
     <section className="auth-shell">
       <section className="panel auth-card">
         <div className="eyebrow">Welcome back</div>
-        <h1>Sign in and continue managing your expenses.</h1>
+        <h1>Sign in to continue.</h1>
         <p className="muted">
-          Use your account to return to the dashboard, log new spending, review imports, and check fresh insights.
+          Return to your dashboard, review recent expenses, and check updated insights.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -64,12 +64,11 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
           </button>
         </form>
       </section>
-      <aside className="panel auth-aside ai-panel">
-        <div className="eyebrow">What you can do</div>
-        <h2 className="card-title">Pick up right where you left off.</h2>
+      <aside className="panel auth-aside">
+        <div className="eyebrow">Workspace</div>
+        <h2 className="card-title">Pick up where you left off.</h2>
         <p className="muted">
-          After signing in, you can add transactions, upload receipts for extraction, and ask the assistant for
-          help understanding your recent spending.
+          After signing in, you can log expenses, import receipts, and review concise summaries of recent activity.
         </p>
         <div className="summary-strip">
           <span className="summary-chip">Add expenses</span>
@@ -83,7 +82,7 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
           </div>
           <div className="feature-item">
             <strong>Insights and assistant</strong>
-            <span className="muted">See trends, suggestions, and ask questions about your activity.</span>
+            <span className="muted">Review trends and ask quick questions when you need extra context.</span>
           </div>
         </div>
       </aside>

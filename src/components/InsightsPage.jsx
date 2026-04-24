@@ -53,13 +53,12 @@ export default function InsightsPage() {
 
   return (
     <section className="dashboard-grid">
-      <section className="panel dashboard-section span-12 insight-hero ai-panel glow-card">
+      <section className="panel dashboard-section span-12 insight-hero">
         <div>
           <div className="eyebrow">Insights</div>
-          <h1 className="card-title">Understand recent spending patterns and what to do next.</h1>
+          <h1 className="card-title">See recent patterns and decide what to do next.</h1>
           <p className="muted">
-            This page turns your recent expense history into plain-language observations and suggestions so you can
-            spot changes quickly.
+            This page turns recent expense history into a short summary so changes are easier to spot.
           </p>
         </div>
         <button className="button" disabled={refreshing} onClick={refresh} type="button">
@@ -67,7 +66,7 @@ export default function InsightsPage() {
         </button>
       </section>
 
-      <section className="panel dashboard-section span-6 stack ai-panel">
+      <section className="panel dashboard-section span-6 stack">
         <div>
           <div className="eyebrow">What changed</div>
           <h2 className="card-title">Spending insights</h2>

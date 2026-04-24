@@ -3,14 +3,13 @@ import Link from "next/link";
 export default function LandingPage() {
   return (
     <section className="panel hero">
-      <div className="eyebrow">Personal finance assistant</div>
+      <div className="eyebrow">AI expense tracking</div>
       <div className="hero-grid">
         <div className="hero-copy">
-          <h1>Track expenses, turn receipts into entries, and get useful spending insights.</h1>
+          <h1>Track expenses with a clean workflow and AI where it actually helps.</h1>
           <p className="hero-lead">
-            FinAgent helps you keep a simple personal money workflow in one place. Add expenses manually, upload
-            receipts or exports to extract entries, and use AI-generated summaries to understand what changed in
-            your spending.
+            FinAgent keeps expense logging straightforward, then adds AI for imports, summaries, and quick questions
+            when you need them.
           </p>
           <div className="hero-proof">
             <span className="hero-proof-item">Manual expense logging</span>
@@ -42,12 +41,12 @@ export default function LandingPage() {
         </div>
 
         <aside className="surface-note">
-          <span className="meta">How to use FinAgent</span>
+          <span className="meta">How it works</span>
           <div className="surface-stack">
-            <div className="card-title">A simple workflow for understanding where your money goes.</div>
+            <div className="card-title">A focused workflow for tracking where your money goes.</div>
             <p className="muted">
-              The app is built around three main jobs: recording expenses, reviewing extracted items before saving
-              them, and checking the insights page for trends and suggestions.
+              The product stays centered on the ledger. AI supports imports, summaries, and quick follow-up questions
+              without taking over the whole interface.
             </p>
           </div>
           <div className="summary-strip">
@@ -56,8 +55,8 @@ export default function LandingPage() {
             <span className="summary-chip">Assistant for questions</span>
           </div>
           <p className="muted">
-            If you are new here, create an account, add a few expenses, then open Insights to see summaries and
-            recommendations based on your recent activity.
+            Start by adding a few expenses. Once your ledger has activity, the insights and assistant become much more
+            useful.
           </p>
           <div className="topology-list">
             <div className="topology-item">Use the Dashboard to add expenses one by one.</div>
