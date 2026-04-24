@@ -78,9 +78,9 @@ export default function ChatDrawer() {
       <aside aria-hidden={!isOpen} className={`chat-drawer panel ${isOpen ? "open" : ""}`}>
         <div className="chat-drawer-header">
           <div className="chat-intro">
-            <div className="eyebrow">AI copilot</div>
+            <div className="eyebrow">FinAgent AI</div>
             <h2 className="card-title">Ask FinAgent</h2>
-            <p className="muted">Get a quick answer about your recent expenses, categories, or ledger activity.</p>
+            <p className="muted">Get a quick answer about your recent expenses, categories, or activity.</p>
           </div>
           <button className="button secondary" onClick={() => setIsOpen(false)} type="button">
             Close
@@ -88,7 +88,7 @@ export default function ChatDrawer() {
         </div>
 
         <div className="chat-banner">
-          <span className="item-pill ai">Assistant live</span>
+          <span className="item-pill ai">FinAgent live</span>
           <span className="muted">Use it for quick finance context without leaving the page.</span>
         </div>
 

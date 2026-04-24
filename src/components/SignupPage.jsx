@@ -41,7 +41,7 @@ export default function SignupPage() {
         <h1>
           Create your account and start tracking
           {" "}
-          <span className="gradient-text">digital value.</span>
+          <span className="gradient-text">expenses clearly.</span>
         </h1>
         <p className="muted">
           Set up your account to begin logging expenses, importing receipts, reviewing AI summaries, and asking quick
@@ -89,13 +89,13 @@ export default function SignupPage() {
         <div className="eyebrow">How it works</div>
         <h2 className="card-title">Start simple, then use AI where it adds value.</h2>
         <p className="muted">
-          Begin with the ledger. Once you have data, the insights page and assistant help you interpret it faster
-          without crowding the core workflow.
+          Begin with your expense history. Once you have data, the insights page and FinAgent help you interpret it
+          faster without crowding the core workflow.
         </p>
         <div className="summary-strip">
           <span className="summary-chip">Create account</span>
           <span className="summary-chip">Add first expenses</span>
-          <span className="summary-chip">Ask the assistant</span>
+          <span className="summary-chip">Ask FinAgent</span>
         </div>
         <div className="feature-list">
           <div className="feature-item corner-accent">

@@ -1035,6 +1035,51 @@ img {
   gap: 10px;
 }
 
+.insights-results {
+  gap: 14px;
+}
+
+.insight-card,
+.suggestion-card {
+  gap: 12px;
+  padding: 20px;
+}
+
+.insight-card {
+  background:
+    linear-gradient(180deg, rgba(247, 147, 26, 0.06), transparent 28%),
+    rgba(15, 17, 21, 0.9);
+  border-color: rgba(247, 147, 26, 0.18);
+}
+
+.suggestion-card {
+  background:
+    linear-gradient(180deg, rgba(255, 214, 0, 0.05), transparent 28%),
+    rgba(15, 17, 21, 0.9);
+  border-color: rgba(255, 214, 0, 0.14);
+}
+
+.insight-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.insight-index {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.insight-body {
+  color: var(--fg-soft);
+  line-height: 1.75;
+  font-size: 0.98rem;
+}
+
 .ledger-row,
 .split-row {
   display: grid;

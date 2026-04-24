@@ -76,12 +76,15 @@ export default function InsightsPage() {
           <div className="eyebrow">What changed</div>
           <h2 className="card-title">Spending insights</h2>
         </div>
-        <ul className="clean">
+        <ul className="clean insights-results">
           {insights.insights.length ? (
-            insights.insights.map((line) => (
-              <li className="list-item" key={line}>
-                <span className="item-pill ai">AI signal</span>
-                <span>{line}</span>
+            insights.insights.map((line, index) => (
+              <li className="list-item insight-card" key={line}>
+                <div className="insight-card-head">
+                  <span className="item-pill ai">FinAgent signal</span>
+                  <span className="insight-index">0{index + 1}</span>
+                </div>
+                <span className="insight-body">{line}</span>
               </li>
             ))
           ) : (
@@ -98,18 +101,21 @@ export default function InsightsPage() {
           <div className="eyebrow">Next moves</div>
           <h2 className="card-title">Suggestions</h2>
         </div>
-        <ul className="clean">
+        <ul className="clean insights-results">
           {insights.suggestions.length ? (
-            insights.suggestions.map((line) => (
-              <li className="list-item" key={line}>
-                <span className="item-pill">Recommended</span>
-                <span>{line}</span>
+            insights.suggestions.map((line, index) => (
+              <li className="list-item suggestion-card" key={line}>
+                <div className="insight-card-head">
+                  <span className="item-pill">Recommended</span>
+                  <span className="insight-index">0{index + 1}</span>
+                </div>
+                <span className="insight-body">{line}</span>
               </li>
             ))
           ) : (
             <li className="empty-state">
               <strong>No suggestions yet</strong>
-              Suggestions will appear here after the insight engine evaluates your ledger.
+              Suggestions will appear here after the insight engine evaluates your expense history.
             </li>
           )}
         </ul>

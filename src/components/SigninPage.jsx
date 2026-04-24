@@ -36,7 +36,7 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
         <h1>
           Re-enter your
           {" "}
-          <span className="gradient-text">trusted ledger.</span>
+          <span className="gradient-text">workspace.</span>
         </h1>
         <p className="muted">
           Return to your dashboard, review recent expenses, and step back into your AI-assisted finance workspace.
@@ -70,9 +70,9 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
       </section>
       <aside className="panel auth-aside">
         <div className="eyebrow">Workspace</div>
-        <h2 className="card-title">Pick up where your last block ended.</h2>
+        <h2 className="card-title">Pick up where you left off.</h2>
         <p className="muted">
-          After signing in, you can log expenses, import receipts, review concise summaries, and ask the assistant for
+          After signing in, you can log expenses, import receipts, review concise summaries, and ask FinAgent for
           quick context.
         </p>
         <div className="summary-strip">

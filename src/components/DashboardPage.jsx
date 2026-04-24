@@ -95,7 +95,7 @@ export default function DashboardPage() {
       );
       setAttachment(null);
       setExtractedExpenses([]);
-      setExtractionNotes(["Imported extracted expenses into your ledger."]);
+      setExtractionNotes(["Imported extracted expenses into your account history."]);
       await refresh();
     } catch (error) {
       setError(sanitizeText(error.message));
@@ -225,7 +225,7 @@ export default function DashboardPage() {
           </div>
         </div>
         <p className="muted">
-          Once this ledger has some activity, the Insights page and assistant can summarize trends and suggest next
+          Once your expense history has some activity, the Insights page and FinAgent can summarize trends and suggest next
           steps.
         </p>
       </section>
@@ -320,7 +320,7 @@ export default function DashboardPage() {
           ) : (
             <li className="empty-state">
               <strong>No expenses yet</strong>
-              Add your first transaction above to start building the ledger and insight history.
+              Add your first transaction above to start building your expense history and insight timeline.
             </li>
           )}
         </ul>
