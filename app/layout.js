@@ -1,4 +1,4 @@
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Roboto } from "next/font/google";
 
 import "./globals.css";
 
@@ -10,25 +10,16 @@ export const metadata = {
   description: "Secure spending intelligence routed through a single frontend edge.",
 };
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
 });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable}`}>
+      <body className={roboto.variable}>
         <Providers>
           <AppShell>{children}</AppShell>
         </Providers>
