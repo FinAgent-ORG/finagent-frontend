@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { chatApi } from "@/src/lib/api-client.js";
 import { sanitizeText } from "@/src/lib/sanitize.js";
@@ -11,18 +11,30 @@ export default function ChatDrawer() {
   const { user } = useAuth();
   const { setError } = useAppError();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [chatMessage, setChatMessage] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
-  const suggestions = [
-    "Summarize my grocery spend this month",
-    "What changed most this week?",
-    "Help me log a transport expense",
-  ];
 
   if (!user) {
     return null;
   }
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 720px)");
+
+    function syncLayout(event) {
+      setIsMobile(event.matches);
+      setIsOpen((current) => (event.matches ? true : current));
+    }
+
+    syncLayout(mediaQuery);
+    mediaQuery.addEventListener("change", syncLayout);
+
+    return () => {
+      mediaQuery.removeEventListener("change", syncLayout);
+    };
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -53,50 +65,45 @@ export default function ChatDrawer() {
     }
   }
 
-  function useSuggestion(text) {
-    setChatMessage(text);
-  }
+  const drawerOpen = isMobile || isOpen;
 
   return (
     <>
       <button
-        aria-hidden={!isOpen}
-        className={`chat-backdrop ${isOpen ? "open" : ""}`}
+        aria-hidden={!drawerOpen || isMobile}
+        className={`chat-backdrop ${drawerOpen && !isMobile ? "open" : ""}`}
         onClick={() => setIsOpen(false)}
-        tabIndex={isOpen ? 0 : -1}
+        tabIndex={drawerOpen && !isMobile ? 0 : -1}
         type="button"
       />
-      <button
-        aria-expanded={isOpen}
-        className="chat-fab"
-        onClick={() => setIsOpen((current) => !current)}
-        type="button"
-      >
-        {isOpen ? "Close Assistant" : "Ask FinAgent"}
-      </button>
+      {isMobile ? null : (
+        <button
+          aria-expanded={drawerOpen}
+          className="chat-fab"
+          onClick={() => setIsOpen((current) => !current)}
+          type="button"
+        >
+          {drawerOpen ? "Close Chat" : "Open Chat"}
+        </button>
+      )}
 
-      <aside aria-hidden={!isOpen} className={`chat-drawer panel ${isOpen ? "open" : ""}`}>
+      <aside aria-hidden={!drawerOpen} className={`chat-drawer panel ${drawerOpen ? "open" : ""}`}>
         <div className="chat-drawer-header">
           <div className="chat-intro">
-            <div className="eyebrow">FinAgent AI</div>
-            <h2 className="card-title">Ask FinAgent</h2>
-            <p className="muted">Get a quick answer about your recent expenses, categories, or activity.</p>
+            <h2 className="card-title">Chat</h2>
+            <p className="muted">Ask about expenses, categories, or recent activity.</p>
           </div>
-          <button className="button secondary" onClick={() => setIsOpen(false)} type="button">
-            Close
-          </button>
-        </div>
-
-        <div className="chat-banner">
-          <span className="item-pill ai">FinAgent live</span>
-          <span className="muted">Use it for quick finance context without leaving the page.</span>
+          {isMobile ? null : (
+            <button className="button secondary" onClick={() => setIsOpen(false)} type="button">
+              Close
+            </button>
+          )}
         </div>
 
         <div className="chat-log">
           {chatHistory.length ? null : (
-            <div className="bubble assistant">
-              <strong>Start with a prompt</strong>
-              <span>Try a quick question about spending, categories, or recent changes.</span>
+            <div className="chat-hint" aria-live="polite">
+              Hint: ask something like "What changed most this week?"
             </div>
           )}
           {chatHistory.map((item, index) => (
@@ -113,24 +120,11 @@ export default function ChatDrawer() {
           ) : null}
         </div>
 
-        <div className="chat-suggestions">
-          {suggestions.map((suggestion) => (
-            <button
-              className="suggestion-pill"
-              key={suggestion}
-              onClick={() => useSuggestion(suggestion)}
-              type="button"
-            >
-              {suggestion}
-            </button>
-          ))}
-        </div>
-
         <form className="chat-form" onSubmit={handleSubmit}>
           <input
             className="chat-input"
             onChange={(event) => setChatMessage(event.target.value)}
-            placeholder="Ask a question about your expenses"
+            placeholder="Ask about your expenses"
             type="text"
             value={chatMessage}
           />
