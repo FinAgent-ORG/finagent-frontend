@@ -35,7 +35,7 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
         <div className="eyebrow">Welcome back</div>
         <h1>Sign in to continue.</h1>
         <p className="muted">
-          Return to your dashboard, review recent expenses, and check updated insights.
+          Return to your dashboard, review recent expenses, and jump back into your AI-assisted finance workspace.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -68,12 +68,13 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
         <div className="eyebrow">Workspace</div>
         <h2 className="card-title">Pick up where you left off.</h2>
         <p className="muted">
-          After signing in, you can log expenses, import receipts, and review concise summaries of recent activity.
+          After signing in, you can log expenses, import receipts, review concise summaries, and ask the assistant for
+          quick context.
         </p>
         <div className="summary-strip">
           <span className="summary-chip">Add expenses</span>
           <span className="summary-chip">Import receipts</span>
-          <span className="summary-chip">Review insights</span>
+          <span className="summary-chip">Chat for answers</span>
         </div>
         <div className="feature-list">
           <div className="feature-item">

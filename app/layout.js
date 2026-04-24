@@ -1,4 +1,4 @@
-import { Geist } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
@@ -10,15 +10,20 @@ export const metadata = {
   description: "Secure spending intelligence routed through a single frontend edge.",
 };
 
-const geist = Geist({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-manrope",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
 });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={geist.variable}>
+      <body className={`${manrope.variable} ${spaceGrotesk.variable}`}>
         <Providers>
           <AppShell>{children}</AppShell>
         </Providers>

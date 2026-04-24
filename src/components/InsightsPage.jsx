@@ -58,7 +58,8 @@ export default function InsightsPage() {
           <div className="eyebrow">Insights</div>
           <h1 className="card-title">See recent patterns and decide what to do next.</h1>
           <p className="muted">
-            This page turns recent expense history into a short summary so changes are easier to spot.
+            This page turns recent expense history into a concise brief, so changes are easier to spot and follow up on
+            with the assistant.
           </p>
         </div>
         <button className="button" disabled={refreshing} onClick={refresh} type="button">

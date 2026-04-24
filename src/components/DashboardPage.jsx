@@ -119,9 +119,10 @@ export default function DashboardPage() {
         <div className="dashboard-summary">
           <div>
             <div className="eyebrow">Dashboard</div>
-            <h1 className="card-title">A simple place to log, import, and review expenses.</h1>
+            <h1 className="card-title">A cleaner command center for expense capture and review.</h1>
             <p className="muted">
-              Add expenses manually, import them from files, and keep an eye on what is already in your ledger.
+              Add expenses manually, import them from files, and keep your running ledger visible while the assistant
+              stays close by for quick questions.
             </p>
           </div>
           <div className="summary-strip">
@@ -130,21 +131,40 @@ export default function DashboardPage() {
             <span className="summary-chip">Receipt import ready</span>
           </div>
         </div>
-        <div className="metric-grid">
-          <div className="metric-card">
+        <div className="hero-side-stack">
+          <div className="assistant-spotlight">
+            <div className="assistant-spotlight-head">
+              <div>
+                <div className="eyebrow">Assistant</div>
+                <h2 className="card-title">Chat has first-class space now.</h2>
+              </div>
+              <span className="item-pill ai">Ready</span>
+            </div>
+            <p className="muted">
+              Use the floating assistant to ask about category changes, recent spending patterns, or what to log next.
+            </p>
+            <div className="assistant-sample-list">
+              <span className="summary-chip">Summarize my grocery spend this month</span>
+              <span className="summary-chip">What changed most this week?</span>
+              <span className="summary-chip">Help me log a transport expense</span>
+            </div>
+          </div>
+          <div className="metric-grid">
+            <div className="metric-card">
             <span className="meta-label">Today</span>
             <span className="metric-value">{totals.today.toFixed(2)}</span>
             <span className="metric-trend">Live daily spend</span>
-          </div>
-          <div className="metric-card">
+            </div>
+            <div className="metric-card">
             <span className="meta-label">This month</span>
             <span className="metric-value">{totals.month.toFixed(2)}</span>
             <span className="metric-trend positive">Primary tracking window</span>
-          </div>
-          <div className="metric-card">
+            </div>
+            <div className="metric-card">
             <span className="meta-label">This year</span>
             <span className="metric-value">{totals.year.toFixed(2)}</span>
             <span className="metric-trend">Long-range balance context</span>
+            </div>
           </div>
         </div>
       </section>
@@ -228,7 +248,8 @@ export default function DashboardPage() {
           </div>
         </div>
         <p className="muted">
-          Once this ledger has some activity, the Insights page can summarize trends and suggest next steps.
+          Once this ledger has some activity, the Insights page and assistant can summarize trends and suggest next
+          steps.
         </p>
       </section>
 

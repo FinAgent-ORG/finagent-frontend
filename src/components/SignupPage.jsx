@@ -40,7 +40,8 @@ export default function SignupPage() {
         <div className="eyebrow">New workspace</div>
         <h1>Create your account and start tracking expenses.</h1>
         <p className="muted">
-          Set up your account to begin logging expenses, importing receipts, and reviewing AI summaries.
+          Set up your account to begin logging expenses, importing receipts, reviewing AI summaries, and asking quick
+          questions whenever you need clarity.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -84,12 +85,13 @@ export default function SignupPage() {
         <div className="eyebrow">How it works</div>
         <h2 className="card-title">Start simple, then use AI where it adds value.</h2>
         <p className="muted">
-          Begin with the ledger. Once you have data, the insights page and assistant can help you interpret it faster.
+          Begin with the ledger. Once you have data, the insights page and assistant help you interpret it faster
+          without crowding the core workflow.
         </p>
         <div className="summary-strip">
           <span className="summary-chip">Create account</span>
           <span className="summary-chip">Add first expenses</span>
-          <span className="summary-chip">Review insights</span>
+          <span className="summary-chip">Ask the assistant</span>
         </div>
         <div className="feature-list">
           <div className="feature-item">
