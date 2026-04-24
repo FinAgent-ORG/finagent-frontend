@@ -29,11 +29,11 @@ export default function AppShell({ children }) {
       <div className="page">
         <header className="panel nav">
           <Link className="brand" href="/">
-            <span className="brand-mark" aria-hidden="true" />
-            <span className="brand-copy">
-              <span className="brand-label">Bitcoin DeFi Ledger</span>
-              <span className="brand-name">FinAgent</span>
+            <span className="brand-mark fa-mark" aria-hidden="true">
+              <span className="fa-mark-f">F</span>
+              <span className="fa-mark-a">A</span>
             </span>
+            <span className="brand-name">FinAgent</span>
           </Link>
           <nav className="nav-links">
             <Link className={navClass("/")} href="/">

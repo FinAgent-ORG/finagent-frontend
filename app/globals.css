@@ -193,7 +193,7 @@ img {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   font-weight: 700;
 }
 
@@ -211,12 +211,32 @@ img {
   box-shadow: var(--shadow-orange-soft);
 }
 
-.brand-mark::before {
-  content: "B";
+.fa-mark {
+  position: relative;
+  overflow: hidden;
+  gap: 0;
+}
+
+.fa-mark-f,
+.fa-mark-a {
+  position: absolute;
   font-family: var(--font-heading);
-  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--accent);
+  line-height: 1;
+}
+
+.fa-mark-f {
+  left: 11px;
+  top: 8px;
+  font-size: 1.18rem;
+  color: #fff3df;
+}
+
+.fa-mark-a {
+  right: 10px;
+  bottom: 7px;
+  font-size: 1rem;
+  color: var(--accent-gold);
 }
 
 .brand-copy {
@@ -959,10 +979,6 @@ img {
 
 .metric-card-primary .metric-value {
   font-size: clamp(1.5rem, 2.6vw, 2.35rem);
-}
-
-.metric-card-primary .metric-trend {
-  margin-top: 12px;
 }
 
 .assistant-spotlight {

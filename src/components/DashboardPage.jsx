@@ -134,17 +134,14 @@ export default function DashboardPage() {
           <div className="metric-card metric-card-primary">
             <span className="meta-label">Today</span>
             <span className="metric-value">{totals.today.toFixed(2)}</span>
-            <span className="metric-trend">Live daily spend</span>
           </div>
           <div className="metric-card metric-card-primary">
             <span className="meta-label">This month</span>
             <span className="metric-value">{totals.month.toFixed(2)}</span>
-            <span className="metric-trend positive">Primary tracking window</span>
           </div>
           <div className="metric-card metric-card-primary">
             <span className="meta-label">This year</span>
             <span className="metric-value">{totals.year.toFixed(2)}</span>
-            <span className="metric-trend">Long-range balance context</span>
           </div>
         </div>
       </section>
