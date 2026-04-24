@@ -115,43 +115,40 @@ export default function DashboardPage() {
 
   return (
     <section className="dashboard-grid">
-      <section className="panel dashboard-section span-12 dashboard-hero dashboard-hero-compact">
-        <div className="dashboard-summary">
-          <div>
-            <div className="eyebrow">Dashboard</div>
-            <h1 className="card-title">
-              Spending overview with faster access to
-              {" "}
-              <span className="gradient-text">what matters.</span>
-            </h1>
-            <p className="muted">
-              Track today, this month, and this year at a glance, then move straight into expense capture and account
-              details below.
-            </p>
+      <section className="panel dashboard-section span-4 stack corner-accent account-card">
+        <div>
+          <div className="eyebrow">Account</div>
+          <h2 className="card-title">Workspace</h2>
+          <p className="account-email meta">{user.email}</p>
+        </div>
+        <div className="stat-grid stat-grid-strong">
+          <div className="stat stat-strong">
+            <span className="stat-label">Today</span>
+            <strong>{totals.today.toFixed(2)} INR</strong>
+          </div>
+          <div className="stat stat-strong">
+            <span className="stat-label">This month</span>
+            <strong>{totals.month.toFixed(2)} INR</strong>
+          </div>
+          <div className="stat stat-strong">
+            <span className="stat-label">This year</span>
+            <strong>{totals.year.toFixed(2)} INR</strong>
           </div>
         </div>
-        <div className="metric-grid metric-grid-emphasis">
-          <div className="metric-card metric-card-primary">
-            <span className="meta-label">Today</span>
-            <span className="metric-value">{totals.today.toFixed(2)}</span>
-          </div>
-          <div className="metric-card metric-card-primary">
-            <span className="meta-label">This month</span>
-            <span className="metric-value">{totals.month.toFixed(2)}</span>
-          </div>
-          <div className="metric-card metric-card-primary">
-            <span className="meta-label">This year</span>
-            <span className="metric-value">{totals.year.toFixed(2)}</span>
-          </div>
-        </div>
+        <p className="muted">
+          Once your expense history has some activity, the Insights page and FinAgent can summarize trends and suggest next
+          steps.
+        </p>
       </section>
 
-      <section className="panel dashboard-section span-8 stack">
+      <section className="panel dashboard-section span-8 stack expense-capture-card">
         <div className="section-header">
           <div className="section-header-copy">
             <div className="eyebrow">Expense capture</div>
             <h2 className="card-title">Add a transaction or import one from a file.</h2>
-            <p className="muted">Enter an amount and description yourself, or attach a file to extract candidate expenses.</p>
+            <p className="muted">
+              Enter an amount and description yourself, or attach a file to extract candidate expenses.
+            </p>
           </div>
         </div>
         <form className="expense-form" onSubmit={handleExpenseSubmit}>
@@ -204,32 +201,7 @@ export default function DashboardPage() {
         </form>
       </section>
 
-      <section className="panel dashboard-section span-4 stack corner-accent account-card">
-        <div>
-          <div className="eyebrow">Account</div>
-          <h2 className="card-title">Workspace</h2>
-          <p className="account-email meta">{user.email}</p>
-        </div>
-        <div className="stat-grid">
-          <div className="stat">
-            <span className="stat-label">Today</span>
-            <strong>{totals.today.toFixed(2)} INR</strong>
-          </div>
-          <div className="stat">
-            <span className="stat-label">This month</span>
-            <strong>{totals.month.toFixed(2)} INR</strong>
-          </div>
-          <div className="stat">
-            <span className="stat-label">This year</span>
-            <strong>{totals.year.toFixed(2)} INR</strong>
-          </div>
-        </div>
-        <p className="muted">
-          Once your expense history has some activity, the Insights page and FinAgent can summarize trends and suggest next
-          steps.
-        </p>
-      </section>
-
+      {extractedExpenses.length || extractionNotes.length ? (
       <section className="panel dashboard-section span-7 stack">
         <div className="section-header">
           <div className="section-header-copy">
@@ -246,7 +218,7 @@ export default function DashboardPage() {
           {extractedExpenses.length ? null : (
             <li className="empty-state">
               <strong>No extracted items yet</strong>
-              Add expenses manually, or attach a receipt, bank export, or image to extract expense candidates.
+              <p>Add expenses manually, or attach a receipt, bank export, or image to extract expense candidates.</p>
             </li>
           )}
           {extractedExpenses.map((item, index) => (
@@ -268,7 +240,9 @@ export default function DashboardPage() {
           ))}
         </ul>
       </section>
+      ) : null}
 
+      {extractedExpenses.length || extractionNotes.length ? (
       <section className="panel dashboard-section span-5 stack corner-accent">
         <div>
           <div className="eyebrow">Notes</div>
@@ -278,7 +252,7 @@ export default function DashboardPage() {
           {extractionNotes.length ? null : (
             <li className="empty-state">
               <strong>Waiting for an upload</strong>
-              Upload a receipt, screenshot, PDF, or export file to analyze expenses.
+              <p>Upload a receipt, screenshot, PDF, or export file to analyze expenses.</p>
             </li>
           )}
           {extractionNotes.map((line) => (
@@ -289,6 +263,7 @@ export default function DashboardPage() {
           ))}
         </ul>
       </section>
+      ) : null}
 
       <section className="panel dashboard-section span-12">
         <div className="section-header">

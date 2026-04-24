@@ -90,7 +90,7 @@ export default function InsightsPage() {
           ) : (
             <li className="empty-state">
               <strong>No insight summary yet</strong>
-              Refresh insights to generate an updated read on recent expense behavior.
+              <p>Refresh insights to generate an updated read on recent expense behavior.</p>
             </li>
           )}
         </ul>
@@ -115,7 +115,7 @@ export default function InsightsPage() {
           ) : (
             <li className="empty-state">
               <strong>No suggestions yet</strong>
-              Suggestions will appear here after the insight engine evaluates your expense history.
+              <p>Suggestions will appear here after the insight engine evaluates your expense history.</p>
             </li>
           )}
         </ul>
