@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { BRAND } from "@/src/constants/branding.js";
 import { insightsApi } from "@/src/lib/api-client.js";
 import { sanitizeLines, sanitizeText } from "@/src/lib/sanitize.js";
 import { useAppError } from "@/src/state/AppErrorContext.jsx";
@@ -44,9 +45,9 @@ export default function InsightsPage() {
 
   if (loading || !user) {
     return (
-      <section className="panel session-message">
-        <div className="eyebrow">Insights</div>
-        <h1>Loading your insights...</h1>
+        <section className="panel session-message">
+        <div className="eyebrow">Business intelligence</div>
+        <h1>Loading your intelligence brief...</h1>
       </section>
     );
   }
@@ -55,33 +56,33 @@ export default function InsightsPage() {
     <section className="dashboard-grid">
       <section className="panel dashboard-section span-12 insight-hero">
         <div>
-          <div className="eyebrow">Insights</div>
+          <div className="eyebrow">Business intelligence</div>
           <h1 className="card-title">
-            Inspect recent patterns and act with
+            Inspect company spend patterns and act with
             {" "}
             <span className="gradient-text">conviction.</span>
           </h1>
           <p className="muted">
-            This page turns recent expense history into a concise brief, so changes are easier to spot and follow up on
-            with the assistant.
+            This page turns recent company expense history into a concise executive brief, so changes are easier to spot
+            and follow up on with the advisor.
           </p>
         </div>
         <button className="button" disabled={refreshing} onClick={refresh} type="button">
-          {refreshing ? "Refreshing..." : "Refresh Insights"}
+          {refreshing ? "Refreshing..." : "Refresh Intelligence"}
         </button>
       </section>
 
       <section className="panel dashboard-section span-6 stack corner-accent">
         <div>
           <div className="eyebrow">What changed</div>
-          <h2 className="card-title">Spending insights</h2>
+          <h2 className="card-title">Company spending intelligence</h2>
         </div>
         <ul className="clean insights-results">
           {insights.insights.length ? (
             insights.insights.map((line, index) => (
               <li className="list-item insight-card" key={line}>
                 <div className="insight-card-head">
-                  <span className="item-pill ai">FinAgent signal</span>
+                  <span className="item-pill ai">{BRAND.pillLabel}</span>
                   <span className="insight-index">0{index + 1}</span>
                 </div>
                 <span className="insight-body">{line}</span>
@@ -89,8 +90,8 @@ export default function InsightsPage() {
             ))
           ) : (
             <li className="empty-state">
-              <strong>No insight summary yet</strong>
-              <p>Refresh insights to generate an updated read on recent expense behavior.</p>
+              <strong>No intelligence summary yet</strong>
+              <p>Refresh the page to generate an updated read on recent company spend behavior.</p>
             </li>
           )}
         </ul>
@@ -99,7 +100,7 @@ export default function InsightsPage() {
       <section className="panel dashboard-section span-6 stack corner-accent">
         <div>
           <div className="eyebrow">Next moves</div>
-          <h2 className="card-title">Suggestions</h2>
+          <h2 className="card-title">Cost optimization recommendations</h2>
         </div>
         <ul className="clean insights-results">
           {insights.suggestions.length ? (
@@ -114,8 +115,8 @@ export default function InsightsPage() {
             ))
           ) : (
             <li className="empty-state">
-              <strong>No suggestions yet</strong>
-              <p>Suggestions will appear here after the insight engine evaluates your expense history.</p>
+              <strong>No recommendations yet</strong>
+              <p>Recommendations appear here after the intelligence engine evaluates company expense history.</p>
             </li>
           )}
         </ul>

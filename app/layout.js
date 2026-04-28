@@ -4,10 +4,11 @@ import "./globals.css";
 
 import AppShell from "@/src/components/AppShell.jsx";
 import Providers from "@/src/components/Providers.jsx";
+import { BRAND } from "@/src/constants/branding.js";
 
 export const metadata = {
-  title: "FinAgent",
-  description: "Secure spending intelligence routed through a single frontend edge.",
+  title: BRAND.name,
+  description: BRAND.description,
 };
 
 const inter = Inter({

@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { BUSINESS_CATEGORIES, DEFAULT_BUSINESS_CATEGORY } from "@/src/constants/categories.js";
+import { BRAND } from "@/src/constants/branding.js";
 import { expenseApi } from "@/src/lib/api-client.js";
 import { sanitizeText } from "@/src/lib/sanitize.js";
 import { useAppError } from "@/src/state/AppErrorContext.jsx";
 import { useAuth } from "@/src/state/AuthContext.jsx";
-
-const categories = ["Food", "Transport", "Utilities", "Entertainment", "Groceries", "Rent", "Healthcare", "Other"];
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -18,7 +18,12 @@ export default function DashboardPage() {
   const [expenses, setExpenses] = useState([]);
   const [expenseLoading, setExpenseLoading] = useState(false);
   const [extracting, setExtracting] = useState(false);
-  const [expenseForm, setExpenseForm] = useState({ amount: "", category: "Other", description: "", currency: "INR" });
+  const [expenseForm, setExpenseForm] = useState({
+    amount: "",
+    category: DEFAULT_BUSINESS_CATEGORY,
+    description: "",
+    currency: "INR",
+  });
   const [attachment, setAttachment] = useState(null);
   const [extractedExpenses, setExtractedExpenses] = useState([]);
   const [extractionNotes, setExtractionNotes] = useState([]);
@@ -64,7 +69,7 @@ export default function DashboardPage() {
         category: expenseForm.category,
         description: expenseForm.description,
       });
-      setExpenseForm({ amount: "", category: "Other", description: "", currency: "INR" });
+      setExpenseForm({ amount: "", category: DEFAULT_BUSINESS_CATEGORY, description: "", currency: "INR" });
       await refresh();
     } catch (error) {
       setError(sanitizeText(error.message));
@@ -95,7 +100,7 @@ export default function DashboardPage() {
       );
       setAttachment(null);
       setExtractedExpenses([]);
-      setExtractionNotes(["Imported extracted expenses into your account history."]);
+      setExtractionNotes(["Imported extracted company expenses into your operating history."]);
       await refresh();
     } catch (error) {
       setError(sanitizeText(error.message));
@@ -106,9 +111,9 @@ export default function DashboardPage() {
 
   if (loading || !user) {
     return (
-      <section className="panel session-message">
-        <div className="eyebrow">Session</div>
-        <h1>Loading your workspace...</h1>
+        <section className="panel session-message">
+        <div className="eyebrow">Company session</div>
+        <h1>Loading your NexaFlow workspace...</h1>
       </section>
     );
   }
@@ -117,37 +122,40 @@ export default function DashboardPage() {
     <section className="dashboard-grid">
       <section className="panel dashboard-section span-4 stack corner-accent account-card">
         <div>
-          <div className="eyebrow">Account</div>
-          <h2 className="card-title">Workspace</h2>
+          <div className="eyebrow">Company profile</div>
+          <h2 className="card-title">Business Dashboard</h2>
           <p className="account-email meta">{user.email}</p>
         </div>
         <div className="stat-grid stat-grid-strong">
           <div className="stat stat-strong">
-            <span className="stat-label">Today</span>
+            <span className="stat-label">Today spend</span>
             <strong>{totals.today.toFixed(2)} INR</strong>
           </div>
           <div className="stat stat-strong">
-            <span className="stat-label">This month</span>
+            <span className="stat-label">Monthly spend</span>
             <strong>{totals.month.toFixed(2)} INR</strong>
           </div>
           <div className="stat stat-strong">
-            <span className="stat-label">This year</span>
+            <span className="stat-label">Annual spend</span>
             <strong>{totals.year.toFixed(2)} INR</strong>
           </div>
         </div>
         <p className="muted">
-          Once your expense history has some activity, the Insights page and FinAgent can summarize trends and suggest next
-          steps.
+          Once company activity builds up, Business Intelligence and
+          {" "}
+          {BRAND.assistantRole}
+          {" "}
+          can summarize patterns and recommend next steps.
         </p>
       </section>
 
       <section className="panel dashboard-section span-8 stack expense-capture-card">
         <div className="section-header">
           <div className="section-header-copy">
-            <div className="eyebrow">Expense capture</div>
-            <h2 className="card-title">Add a transaction or import one from a file.</h2>
+            <div className="eyebrow">Expense operations</div>
+            <h2 className="card-title">Capture a company expense or import one from a file.</h2>
             <p className="muted">
-              Enter an amount and description yourself, or attach a file to extract candidate expenses.
+              Enter an amount and description manually, or attach a file to extract candidate company expense records.
             </p>
           </div>
         </div>
@@ -166,7 +174,7 @@ export default function DashboardPage() {
               onChange={(event) => setExpenseForm((current) => ({ ...current, category: event.target.value }))}
               value={expenseForm.category}
             >
-              {categories.map((category) => (
+              {BUSINESS_CATEGORIES.map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
@@ -176,27 +184,27 @@ export default function DashboardPage() {
           <input
             maxLength={500}
             onChange={(event) => setExpenseForm((current) => ({ ...current, description: event.target.value }))}
-            placeholder="Description"
+            placeholder="Expense description"
             required={!attachment}
             type="text"
             value={expenseForm.description}
           />
           <label className="attachment-field">
-            <span className="field-label">Attach receipt or file</span>
+            <span className="field-label">Attach invoice or file</span>
             <input
               accept="image/*,.pdf,.txt,.csv,.json"
               onChange={(event) => {
                 const nextFile = event.target.files?.[0] ?? null;
                 setAttachment(nextFile);
                 setExtractedExpenses([]);
-                setExtractionNotes(nextFile ? ["Attachment ready. Submit to extract expense candidates."] : []);
+                setExtractionNotes(nextFile ? ["File ready. Submit to extract company expense candidates."] : []);
               }}
               type="file"
             />
-            <span className="muted">Supports images, PDFs, text, CSV, and JSON imports.</span>
+            <span className="muted">Supports images, PDFs, text, CSV, and JSON expense imports.</span>
           </label>
           <button className="button" disabled={expenseLoading} type="submit">
-            {expenseLoading ? "Processing..." : attachment ? "Extract Expenses" : "Save Expense"}
+            {expenseLoading ? "Processing..." : attachment ? "Extract Company Expenses" : "Save Company Expense"}
           </button>
         </form>
       </section>
@@ -205,12 +213,12 @@ export default function DashboardPage() {
       <section className="panel dashboard-section span-7 stack">
         <div className="section-header">
           <div className="section-header-copy">
-            <div className="eyebrow">Attachment flow</div>
-            <h2 className="card-title">Extracted expenses</h2>
+            <div className="eyebrow">Document intake</div>
+            <h2 className="card-title">Extracted company expenses</h2>
           </div>
           {extractedExpenses.length ? (
             <button className="button secondary" disabled={extracting} onClick={handleImportExtracted} type="button">
-              {extracting ? "Importing..." : "Import Extracted Expenses"}
+              {extracting ? "Importing..." : "Import Extracted Records"}
             </button>
           ) : null}
         </div>
@@ -218,7 +226,7 @@ export default function DashboardPage() {
           {extractedExpenses.length ? null : (
             <li className="empty-state">
               <strong>No extracted items yet</strong>
-              <p>Add expenses manually, or attach a receipt, bank export, or image to extract expense candidates.</p>
+              <p>Add records manually, or attach an invoice, bank export, or image to extract company expense candidates.</p>
             </li>
           )}
           {extractedExpenses.map((item, index) => (
@@ -245,19 +253,19 @@ export default function DashboardPage() {
       {extractedExpenses.length || extractionNotes.length ? (
       <section className="panel dashboard-section span-5 stack corner-accent">
         <div>
-          <div className="eyebrow">Notes</div>
+          <div className="eyebrow">Review notes</div>
           <h2 className="card-title">Extraction notes</h2>
         </div>
         <ul className="clean">
           {extractionNotes.length ? null : (
             <li className="empty-state">
-              <strong>Waiting for an upload</strong>
-              <p>Upload a receipt, screenshot, PDF, or export file to analyze expenses.</p>
+              <strong>Waiting for a file</strong>
+              <p>Upload an invoice, screenshot, PDF, or export file to analyze company expenses.</p>
             </li>
           )}
           {extractionNotes.map((line) => (
             <li className="list-item" key={line}>
-              <span className="item-pill ai">AI extraction</span>
+              <span className="item-pill ai">AI intake</span>
               <span>{line}</span>
             </li>
           ))}
@@ -268,10 +276,10 @@ export default function DashboardPage() {
       <section className="panel dashboard-section span-12">
         <div className="section-header">
           <div className="section-header-copy">
-            <div className="eyebrow">Ledger</div>
-            <h2 className="card-title">Recent expenses</h2>
+            <div className="eyebrow">Company ledger</div>
+            <h2 className="card-title">Recent company expenses</h2>
           </div>
-          <span className="summary-chip">{expenses.length} entries</span>
+          <span className="summary-chip">{expenses.length} records</span>
         </div>
         <ul className="clean">
           {expenses.length ? (
@@ -294,8 +302,8 @@ export default function DashboardPage() {
             ))
           ) : (
             <li className="empty-state">
-              <strong>No expenses yet</strong>
-              Add your first transaction above to start building your expense history and insight timeline.
+              <strong>No company expenses yet</strong>
+              Add your first company record above to start building your operational history and intelligence timeline.
             </li>
           )}
         </ul>

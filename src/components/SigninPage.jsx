@@ -32,14 +32,14 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
   return (
     <section className="auth-shell">
       <section className="panel auth-card">
-        <div className="eyebrow">Welcome back</div>
+        <div className="eyebrow">Business access</div>
         <h1>
           Re-enter your
           {" "}
-          <span className="gradient-text">workspace.</span>
+          <span className="gradient-text">company workspace.</span>
         </h1>
         <p className="muted">
-          Return to your dashboard, review recent expenses, and step back into your AI-assisted finance workspace.
+          Return to the dashboard, review recent company expenses, and step back into your AI-assisted business workspace.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -64,30 +64,30 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
             />
           </label>
           <button className="button" disabled={isPending} type="submit">
-            {isPending ? "Signing in..." : "Enter Workspace"}
+            {isPending ? "Signing in..." : "Enter NexaFlow"}
           </button>
         </form>
       </section>
       <aside className="panel auth-aside">
-        <div className="eyebrow">Workspace</div>
-        <h2 className="card-title">Pick up where you left off.</h2>
+        <div className="eyebrow">Operations</div>
+        <h2 className="card-title">Pick up where your team left off.</h2>
         <p className="muted">
-          After signing in, you can log expenses, import receipts, review concise summaries, and ask FinAgent for
-          quick context.
+          After signing in, you can record company expenses, import invoices, review concise summaries, and ask the
+          business advisor for fast context.
         </p>
         <div className="summary-strip">
-          <span className="summary-chip">Add expenses</span>
-          <span className="summary-chip">Import receipts</span>
-          <span className="summary-chip">Chat for answers</span>
+          <span className="summary-chip">Log spend</span>
+          <span className="summary-chip">Import files</span>
+          <span className="summary-chip">Ask the advisor</span>
         </div>
         <div className="feature-list">
           <div className="feature-item corner-accent">
-            <strong>Dashboard</strong>
-            <span className="muted">Track spending totals and add new entries quickly.</span>
+            <strong>Business dashboard</strong>
+            <span className="muted">Track operational spend totals and add new records quickly.</span>
           </div>
           <div className="feature-item corner-accent">
-            <strong>Insights and assistant</strong>
-            <span className="muted">Review trends and ask quick questions when you need extra context.</span>
+            <strong>Intelligence and advisor</strong>
+            <span className="muted">Review trends and ask quick questions when leadership needs context.</span>
           </div>
         </div>
       </aside>
