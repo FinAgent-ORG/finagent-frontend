@@ -1,3 +1,27 @@
+function formatErrorDetail(detail) {
+  if (Array.isArray(detail)) {
+    return detail
+      .map((item) => {
+        if (typeof item === "string") {
+          return item;
+        }
+        if (item && typeof item === "object") {
+          const location = Array.isArray(item.loc) ? item.loc.join(".") : "";
+          const message = item.msg ?? JSON.stringify(item);
+          return location ? `${location}: ${message}` : message;
+        }
+        return String(item);
+      })
+      .join(" | ");
+  }
+
+  if (detail && typeof detail === "object") {
+    return detail.message ?? JSON.stringify(detail);
+  }
+
+  return detail;
+}
+
 async function request(path, { body, method = "GET" } = {}) {
   const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
   const response = await fetch(path, {
@@ -12,7 +36,7 @@ async function request(path, { body, method = "GET" } = {}) {
 
     try {
       const payload = await response.json();
-      detail = payload.detail ?? detail;
+      detail = formatErrorDetail(payload.detail ?? detail);
     } catch {
       detail = response.statusText || detail;
     }
