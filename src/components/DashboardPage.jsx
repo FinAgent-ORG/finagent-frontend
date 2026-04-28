@@ -3,7 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { BUSINESS_CATEGORIES, DEFAULT_BUSINESS_CATEGORY } from "@/src/constants/categories.js";
+import {
+  BUSINESS_CATEGORIES,
+  DEFAULT_BUSINESS_CATEGORY,
+  mapApiCategoryToUi,
+  mapUiCategoryToApi,
+} from "@/src/constants/categories.js";
 import { BRAND } from "@/src/constants/branding.js";
 import { expenseApi } from "@/src/lib/api-client.js";
 import { sanitizeText } from "@/src/lib/sanitize.js";
@@ -34,7 +39,12 @@ export default function DashboardPage() {
     try {
       const [nextTotals, nextExpenses] = await Promise.all([expenseApi.getTotals(), expenseApi.listExpenses()]);
       setTotals(nextTotals);
-      setExpenses(nextExpenses);
+      setExpenses(
+        nextExpenses.map((expense) => ({
+          ...expense,
+          category: mapApiCategoryToUi(expense.category),
+        })),
+      );
     } catch (error) {
       if (error.status === 401) {
         router.replace("/signin");
@@ -58,7 +68,12 @@ export default function DashboardPage() {
     try {
       if (attachment) {
         const extraction = await expenseApi.extractExpenses(attachment);
-        setExtractedExpenses(extraction.expenses ?? []);
+        setExtractedExpenses(
+          (extraction.expenses ?? []).map((expense) => ({
+            ...expense,
+            category: mapApiCategoryToUi(expense.category),
+          })),
+        );
         setExtractionNotes(extraction.notes ?? []);
         return;
       }
@@ -66,7 +81,7 @@ export default function DashboardPage() {
       await expenseApi.createExpense({
         amount: Number(expenseForm.amount),
         currency: expenseForm.currency,
-        category: expenseForm.category,
+        category: mapUiCategoryToApi(expenseForm.category),
         description: expenseForm.description,
       });
       setExpenseForm({ amount: "", category: DEFAULT_BUSINESS_CATEGORY, description: "", currency: "INR" });
@@ -91,7 +106,7 @@ export default function DashboardPage() {
         extractedExpenses.map((expense) =>
           expenseApi.createExpense({
             amount: Number(expense.amount),
-            category: expense.category,
+            category: mapUiCategoryToApi(expense.category),
             currency: expense.currency,
             description: expense.description,
             expense_date: expense.expense_date || undefined,
