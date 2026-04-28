@@ -37,15 +37,15 @@ export default function SignupPage() {
   return (
     <section className="auth-shell">
       <section className="panel auth-card">
-        <div className="eyebrow">New workspace</div>
+        <div className="eyebrow">New company workspace</div>
         <h1>
-          Create your account and start tracking
+          Create company access and start managing
           {" "}
-          <span className="gradient-text">expenses clearly.</span>
+          <span className="gradient-text">company spend clearly.</span>
         </h1>
         <p className="muted">
-          Set up your account to begin logging expenses, importing receipts, reviewing AI summaries, and asking quick
-          questions whenever you need clarity.
+          Set up company access to begin recording company expenses, importing source files, reviewing AI summaries, and
+          asking for quick operating guidance whenever clarity is needed.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -81,30 +81,30 @@ export default function SignupPage() {
             />
           </label>
           <button className="button" disabled={isPending} type="submit">
-            {isPending ? "Creating account..." : "Create Account"}
+            {isPending ? "Creating access..." : "Create Workspace"}
           </button>
         </form>
       </section>
       <aside className="panel auth-aside">
         <div className="eyebrow">How it works</div>
-        <h2 className="card-title">Start simple, then use AI where it adds value.</h2>
+        <h2 className="card-title">Start with operations, then use AI where it adds value.</h2>
         <p className="muted">
-          Begin with your expense history. Once you have data, the insights page and FinAgent help you interpret it
+          Begin with company expense history. Once data is flowing, the intelligence page and advisor help interpret it
           faster without crowding the core workflow.
         </p>
         <div className="summary-strip">
-          <span className="summary-chip">Create account</span>
-          <span className="summary-chip">Add first expenses</span>
-          <span className="summary-chip">Ask FinAgent</span>
+          <span className="summary-chip">Create workspace</span>
+          <span className="summary-chip">Add first records</span>
+          <span className="summary-chip">Ask the advisor</span>
         </div>
         <div className="feature-list">
           <div className="feature-item corner-accent">
-            <strong>Manual and imported entries</strong>
-            <span className="muted">Log expenses directly or upload files to extract likely transactions.</span>
+            <strong>Manual and imported records</strong>
+            <span className="muted">Log company expenses directly or upload files to extract likely expense records.</span>
           </div>
           <div className="feature-item corner-accent">
-            <strong>Dedicated insights lane</strong>
-            <span className="muted">Use the insights page when you want summaries, patterns, and suggestions.</span>
+            <strong>Dedicated intelligence lane</strong>
+            <span className="muted">Use the intelligence page when you want summaries, patterns, and recommendations.</span>
           </div>
         </div>
       </aside>

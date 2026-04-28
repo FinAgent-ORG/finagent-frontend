@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { BRAND } from "@/src/constants/branding.js";
 import { chatApi } from "@/src/lib/api-client.js";
 import { sanitizeText } from "@/src/lib/sanitize.js";
 import { useAppError } from "@/src/state/AppErrorContext.jsx";
@@ -58,7 +59,7 @@ export default function ChatDrawer() {
       setError(sanitizeText(error.message));
       setChatHistory((current) => [
         ...current,
-        { role: "assistant", text: "I could not complete that request right now." },
+        { role: "assistant", text: "I could not complete that business request right now." },
       ]);
     } finally {
       setChatLoading(false);
@@ -83,15 +84,15 @@ export default function ChatDrawer() {
           onClick={() => setIsOpen((current) => !current)}
           type="button"
         >
-          {drawerOpen ? "Close Chat" : "Open Chat"}
+          {drawerOpen ? "Close Advisor" : "Open Advisor"}
         </button>
       )}
 
       <aside aria-hidden={!drawerOpen} className={`chat-drawer panel ${drawerOpen ? "open" : ""}`}>
         <div className="chat-drawer-header">
           <div className="chat-intro">
-            <h2 className="card-title">Chat</h2>
-            <p className="muted">Ask about expenses, categories, or recent activity.</p>
+            <h2 className="card-title">{BRAND.assistantRole}</h2>
+            <p className="muted">Ask about company spend, categories, vendors, or recent operating activity.</p>
           </div>
           {isMobile ? null : (
             <button className="button secondary" onClick={() => setIsOpen(false)} type="button">
@@ -103,19 +104,21 @@ export default function ChatDrawer() {
         <div className="chat-log">
           {chatHistory.length ? null : (
             <div className="chat-hint" aria-live="polite">
-              Hint: ask something like "What changed most this week?"
+              Hint: ask something like "Which operating category changed most this week?"
             </div>
           )}
           {chatHistory.map((item, index) => (
             <div className={`bubble ${item.role}`} key={`${item.role}-${index}`}>
-              <span className="bubble-label">{item.role === "user" ? "You" : "FinAgent"}</span>
+              <span className="bubble-label">{item.role === "user" ? "You" : BRAND.name}</span>
               {item.text}
             </div>
           ))}
           {chatLoading ? (
             <div className="bubble assistant">
-              <span className="bubble-label">FinAgent</span>
-              FinAgent is thinking...
+              <span className="bubble-label">{BRAND.name}</span>
+              {BRAND.assistantName}
+              {" "}
+              is analyzing...
             </div>
           ) : null}
         </div>
@@ -124,7 +127,7 @@ export default function ChatDrawer() {
           <input
             className="chat-input"
             onChange={(event) => setChatMessage(event.target.value)}
-            placeholder="Ask about your expenses"
+            placeholder="Ask about company expenses, cost trends, or operational forecasts"
             type="text"
             value={chatMessage}
           />
