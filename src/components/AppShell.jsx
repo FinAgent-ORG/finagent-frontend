@@ -26,77 +26,142 @@ export default function AppShell({ children }) {
   }
 
   function navStatusLabel() {
+    if (pathname === "/") {
+      return "Platform overview";
+    }
+    if (pathname === "/signin") {
+      return "Workspace access";
+    }
+    if (pathname === "/signup") {
+      return "Provision workspace";
+    }
     if (pathname === "/dashboard") {
-      return "business dashboard";
+      return "Expense operations";
     }
     if (pathname === "/insights") {
-      return "business intelligence";
+      return "Expense analytics";
     }
-    return pathname.replace("/", "");
+    return pathname.replace("/", "") || "Workspace";
   }
+
+  const titleByPath = {
+    "/": "Business expense management",
+    "/dashboard": "Expense operations center",
+    "/insights": "Expense analytics brief",
+    "/signin": "Secure workspace access",
+    "/signup": "Create company workspace",
+  };
 
   return (
     <div className="shell">
-      <div className="page">
-        <header className="panel nav">
-          <Link className="brand" href="/">
-            <span className="brand-mark fa-mark" aria-hidden="true">
-              <span className="fa-mark-f">N</span>
-              <span className="fa-mark-a">F</span>
-            </span>
-            <span className="brand-name">{BRAND.name}</span>
-          </Link>
-          <nav className="nav-links">
+      <div className="page app-layout">
+        <aside className="panel app-sidebar">
+          <div className="sidebar-section">
+            <Link className="brand" href="/">
+              <span className="brand-mark fa-mark" aria-hidden="true">
+                <span className="fa-mark-f">N</span>
+                <span className="fa-mark-a">F</span>
+              </span>
+              <span className="brand-copy">
+                <span className="brand-label">Expense operations</span>
+                <span className="brand-name">{BRAND.name}</span>
+              </span>
+            </Link>
+            <p className="sidebar-copy">
+              Company expense capture, analytics, and advisor workflows in one operational workspace.
+            </p>
+          </div>
+
+          <nav className="sidebar-nav">
             <Link className={navClass("/")} href="/">
-              Overview
+              <span className="nav-link-kicker">01</span>
+              <span>
+                <strong>Overview</strong>
+                <small>Platform and workflow summary</small>
+              </span>
             </Link>
             {user ? (
               <>
                 <Link className={navClass("/dashboard")} href="/dashboard">
-                  Dashboard
+                  <span className="nav-link-kicker">02</span>
+                  <span>
+                    <strong>Expenses</strong>
+                    <small>Capture, import, and review activity</small>
+                  </span>
                 </Link>
                 <Link className={navClass("/insights")} href="/insights">
-                  Intelligence
+                  <span className="nav-link-kicker">03</span>
+                  <span>
+                    <strong>Analytics</strong>
+                    <small>Executive brief and recommendations</small>
+                  </span>
                 </Link>
               </>
             ) : null}
-            {pathname === "/dashboard" || pathname === "/insights" ? (
-              <span className="nav-status meta">{navStatusLabel()}</span>
-            ) : null}
           </nav>
-          <div className="nav-actions">
+
+          <div className="sidebar-section sidebar-section-fill">
+            <div className="sidebar-card">
+              <span className="sidebar-card-label">Workspace state</span>
+              <strong>{user ? "Authenticated session" : "Visitor session"}</strong>
+              <p className="muted">
+                {user
+                  ? "Your expense records, analytics, and advisor requests stay scoped to the active account."
+                  : "Sign in to access expense operations, analytics, and the advisor."}
+              </p>
+            </div>
+          </div>
+
+          <div className="sidebar-footer">
             {user ? (
               <>
                 <span className="user-pill meta">{user.email}</span>
-                <button className="button secondary" onClick={handleSignout} type="button">
+                <button className="button secondary sidebar-button" onClick={handleSignout} type="button">
                   Sign Out
                 </button>
               </>
             ) : loading ? (
-              <span className="meta">Checking company access</span>
+              <span className="meta">Checking workspace access</span>
             ) : (
-              <>
-                <Link className="nav-link" href="/signin">
+              <div className="sidebar-actions">
+                <Link className="button secondary" href="/signin">
                   Sign In
                 </Link>
                 <Link className="button" href="/signup">
-                  Launch Workspace
+                  Create Workspace
                 </Link>
-              </>
+              </div>
             )}
           </div>
-        </header>
+        </aside>
 
-        {error ? (
-          <div className="banner">
-            <span>{error}</span>
-            <button className="button secondary" onClick={() => setError("")} type="button">
-              Dismiss
-            </button>
-          </div>
-        ) : null}
+        <div className="app-main">
+          <header className="panel topbar">
+            <div className="topbar-copy">
+              <span className="eyebrow eyebrow-compact">{navStatusLabel()}</span>
+              <h1 className="topbar-title">{titleByPath[pathname] ?? "NexaFlow workspace"}</h1>
+            </div>
+            <div className="topbar-actions">
+              <span className="nav-status meta">{user ? "Secure account scope" : "Public workspace view"}</span>
+              {user ? (
+                <span className="summary-chip">Advisor available</span>
+              ) : (
+                <span className="summary-chip">Read-only overview</span>
+              )}
+            </div>
+          </header>
 
-        {children}
+          {error ? (
+            <div className="banner">
+              <span>{error}</span>
+              <button className="button secondary" onClick={() => setError("")} type="button">
+                Dismiss
+              </button>
+            </div>
+          ) : null}
+
+          {children}
+        </div>
       </div>
       <ChatDrawer />
     </div>

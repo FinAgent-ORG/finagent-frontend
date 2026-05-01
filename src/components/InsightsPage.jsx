@@ -45,7 +45,7 @@ export default function InsightsPage() {
 
   if (loading || !user) {
     return (
-        <section className="panel session-message">
+      <section className="panel session-message">
         <div className="eyebrow">Business intelligence</div>
         <h1>Loading your intelligence brief...</h1>
       </section>
@@ -56,26 +56,24 @@ export default function InsightsPage() {
     <section className="dashboard-grid">
       <section className="panel dashboard-section span-12 insight-hero">
         <div>
-          <div className="eyebrow">Business intelligence</div>
+          <div className="eyebrow">Expense analytics</div>
           <h1 className="card-title">
-            Inspect company spend patterns and act with
-            {" "}
-            <span className="gradient-text">conviction.</span>
+            Review spend patterns, surface risk signals, and brief stakeholders quickly.
           </h1>
           <p className="muted">
-            This page turns recent company expense history into a concise executive brief, so changes are easier to spot
-            and follow up on with the advisor.
+            This page turns recent company expense history into a concise operations brief so changes are easier to
+            spot, communicate, and follow up on with the advisor.
           </p>
         </div>
         <button className="button" disabled={refreshing} onClick={refresh} type="button">
-          {refreshing ? "Refreshing..." : "Refresh Intelligence"}
+          {refreshing ? "Refreshing..." : "Refresh Analytics"}
         </button>
       </section>
 
       <section className="panel dashboard-section span-6 stack corner-accent">
         <div>
           <div className="eyebrow">What changed</div>
-          <h2 className="card-title">Company spending intelligence</h2>
+          <h2 className="card-title">Expense analytics summary</h2>
         </div>
         <ul className="clean insights-results">
           {insights.insights.length ? (
@@ -90,7 +88,7 @@ export default function InsightsPage() {
             ))
           ) : (
             <li className="empty-state">
-              <strong>No intelligence summary yet</strong>
+              <strong>No analytics summary yet</strong>
               <p>Refresh the page to generate an updated read on recent company spend behavior.</p>
             </li>
           )}
@@ -116,7 +114,7 @@ export default function InsightsPage() {
           ) : (
             <li className="empty-state">
               <strong>No recommendations yet</strong>
-              <p>Recommendations appear here after the intelligence engine evaluates company expense history.</p>
+              <p>Recommendations appear here after the analytics engine evaluates company expense history.</p>
             </li>
           )}
         </ul>
