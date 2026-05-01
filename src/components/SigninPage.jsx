@@ -32,14 +32,13 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
   return (
     <section className="auth-shell">
       <section className="panel auth-card">
-        <div className="eyebrow">Business access</div>
+        <div className="eyebrow">Workspace access</div>
         <h1>
-          Re-enter your
-          {" "}
-          <span className="gradient-text">company workspace.</span>
+          Access your company expense workspace securely.
         </h1>
         <p className="muted">
-          Return to the dashboard, review recent company expenses, and step back into your AI-assisted business workspace.
+          Return to expense operations, review recent company activity, and step back into your advisor-enabled
+          workspace.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label className="field">
@@ -64,29 +63,29 @@ export default function SigninPage({ nextPath = "/dashboard" }) {
             />
           </label>
           <button className="button" disabled={isPending} type="submit">
-            {isPending ? "Signing in..." : "Enter NexaFlow"}
+            {isPending ? "Signing in..." : "Enter Workspace"}
           </button>
         </form>
       </section>
       <aside className="panel auth-aside">
-        <div className="eyebrow">Operations</div>
-        <h2 className="card-title">Pick up where your team left off.</h2>
+        <div className="eyebrow">Workspace summary</div>
+        <h2 className="card-title">Resume current expense operations without losing context.</h2>
         <p className="muted">
           After signing in, you can record company expenses, import invoices, review concise summaries, and ask the
           business advisor for fast context.
         </p>
         <div className="summary-strip">
-          <span className="summary-chip">Log spend</span>
-          <span className="summary-chip">Import files</span>
+          <span className="summary-chip">Capture records</span>
+          <span className="summary-chip">Review analytics</span>
           <span className="summary-chip">Ask the advisor</span>
         </div>
         <div className="feature-list">
           <div className="feature-item corner-accent">
-            <strong>Business dashboard</strong>
-            <span className="muted">Track operational spend totals and add new records quickly.</span>
+            <strong>Expense operations center</strong>
+            <span className="muted">Track operating spend totals and add new records quickly.</span>
           </div>
           <div className="feature-item corner-accent">
-            <strong>Intelligence and advisor</strong>
+            <strong>Analytics and advisor</strong>
             <span className="muted">Review trends and ask quick questions when leadership needs context.</span>
           </div>
         </div>

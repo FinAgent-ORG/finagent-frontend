@@ -37,11 +37,9 @@ export default function SignupPage() {
   return (
     <section className="auth-shell">
       <section className="panel auth-card">
-        <div className="eyebrow">New company workspace</div>
+        <div className="eyebrow">Provision workspace</div>
         <h1>
-          Create company access and start managing
-          {" "}
-          <span className="gradient-text">company spend clearly.</span>
+          Create company access and start managing expense operations clearly.
         </h1>
         <p className="muted">
           Set up company access to begin recording company expenses, importing source files, reviewing AI summaries, and
@@ -86,16 +84,16 @@ export default function SignupPage() {
         </form>
       </section>
       <aside className="panel auth-aside">
-        <div className="eyebrow">How it works</div>
-        <h2 className="card-title">Start with operations, then use AI where it adds value.</h2>
+        <div className="eyebrow">Implementation path</div>
+        <h2 className="card-title">Start with expense operations, then use analytics where it adds value.</h2>
         <p className="muted">
           Begin with company expense history. Once data is flowing, the intelligence page and advisor help interpret it
           faster without crowding the core workflow.
         </p>
         <div className="summary-strip">
-          <span className="summary-chip">Create workspace</span>
+          <span className="summary-chip">Provision access</span>
           <span className="summary-chip">Add first records</span>
-          <span className="summary-chip">Ask the advisor</span>
+          <span className="summary-chip">Review analytics</span>
         </div>
         <div className="feature-list">
           <div className="feature-item corner-accent">
@@ -103,8 +101,8 @@ export default function SignupPage() {
             <span className="muted">Log company expenses directly or upload files to extract likely expense records.</span>
           </div>
           <div className="feature-item corner-accent">
-            <strong>Dedicated intelligence lane</strong>
-            <span className="muted">Use the intelligence page when you want summaries, patterns, and recommendations.</span>
+            <strong>Dedicated analytics lane</strong>
+            <span className="muted">Use the analytics page when you want summaries, patterns, and recommendations.</span>
           </div>
         </div>
       </aside>

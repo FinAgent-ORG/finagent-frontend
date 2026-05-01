@@ -92,7 +92,7 @@ export default function ChatDrawer() {
         <div className="chat-drawer-header">
           <div className="chat-intro">
             <h2 className="card-title">{BRAND.assistantRole}</h2>
-            <p className="muted">Ask about company spend, categories, vendors, or recent operating activity.</p>
+            <p className="muted">Ask about company spend, categories, vendors, trends, or recent operating activity.</p>
           </div>
           {isMobile ? null : (
             <button className="button secondary" onClick={() => setIsOpen(false)} type="button">
@@ -104,7 +104,7 @@ export default function ChatDrawer() {
         <div className="chat-log">
           {chatHistory.length ? null : (
             <div className="chat-hint" aria-live="polite">
-              Hint: ask something like "Which operating category changed most this week?"
+              Example: "Which category changed most this week?"
             </div>
           )}
           {chatHistory.map((item, index) => (
@@ -127,7 +127,7 @@ export default function ChatDrawer() {
           <input
             className="chat-input"
             onChange={(event) => setChatMessage(event.target.value)}
-            placeholder="Ask about company expenses, cost trends, or operational forecasts"
+            placeholder="Ask about expense activity, cost trends, or operational forecasts"
             type="text"
             value={chatMessage}
           />
