@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { AUTH_COOKIE_NAME } from "./src/lib/auth-session.js";
 
-export function middleware(request) {
+export function proxy(request) {
   const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
 
   if (!token) {
